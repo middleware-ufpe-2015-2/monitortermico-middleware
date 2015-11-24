@@ -13,9 +13,11 @@ public class UDPClientRequestHandler implements IClientRequestHandler {
 	}
 
 	@Override
-	public byte[] receive() throws IOException, InterruptedException {
+	public byte[] receive() throws IOException, InterruptedException,
+			ClassNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
