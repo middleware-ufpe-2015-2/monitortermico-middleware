@@ -1,8 +1,8 @@
-package messaging.serverrequesthandler.tcp;
+package infrastructure.serverrequesthandler.tcp;
+
+import infrastructure.serverrequesthandler.IServerRequestHandler;
 
 import java.io.IOException;
-
-import messaging.serverrequesthandler.IServerRequestHandler;
 
 public class TCPServerRequestHandler implements IServerRequestHandler {
 

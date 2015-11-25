@@ -1,4 +1,4 @@
-package messaging.clientrequesthandler;
+package infrastructure.clientrequesthandler;
 
 import java.io.IOException;
 

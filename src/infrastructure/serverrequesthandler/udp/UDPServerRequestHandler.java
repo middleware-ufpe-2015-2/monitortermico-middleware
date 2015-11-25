@@ -1,10 +1,10 @@
-package messaging.serverrequesthandler.http;
+package infrastructure.serverrequesthandler.udp;
+
+import infrastructure.serverrequesthandler.IServerRequestHandler;
 
 import java.io.IOException;
 
-import messaging.serverrequesthandler.IServerRequestHandler;
-
-public class HTTPServerRequestHandler implements IServerRequestHandler {
+public class UDPServerRequestHandler implements IServerRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {

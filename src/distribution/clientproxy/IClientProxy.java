@@ -1,4 +1,4 @@
-package invocation.clientproxy;
+package distribution.clientproxy;
 
 public interface IClientProxy {
 

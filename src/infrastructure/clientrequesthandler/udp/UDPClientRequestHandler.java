@@ -1,10 +1,10 @@
-package messaging.clientrequesthandler.tcp;
+package infrastructure.clientrequesthandler.udp;
+
+import infrastructure.clientrequesthandler.IClientRequestHandler;
 
 import java.io.IOException;
 
-import messaging.clientrequesthandler.IClientRequestHandler;
-
-public class TCPClientRequestHandler implements IClientRequestHandler {
+public class UDPClientRequestHandler implements IClientRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {

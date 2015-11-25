@@ -1,8 +1,8 @@
-package messaging.clientrequesthandler.http;
+package infrastructure.clientrequesthandler.http;
+
+import infrastructure.clientrequesthandler.IClientRequestHandler;
 
 import java.io.IOException;
-
-import messaging.clientrequesthandler.IClientRequestHandler;
 
 public class HttpClientProxyRequestHandler implements IClientRequestHandler {
 
