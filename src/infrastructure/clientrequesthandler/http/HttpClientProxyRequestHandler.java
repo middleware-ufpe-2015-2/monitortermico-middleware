@@ -1,10 +1,10 @@
 package infrastructure.clientrequesthandler.http;
 
-import infrastructure.clientrequesthandler.IClientRequestHandler;
+import infrastructure.clientrequesthandler.ClientRequestHandler;
 
 import java.io.IOException;
 
-public class HttpClientProxyRequestHandler implements IClientRequestHandler {
+public class HttpClientProxyRequestHandler extends ClientRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {
