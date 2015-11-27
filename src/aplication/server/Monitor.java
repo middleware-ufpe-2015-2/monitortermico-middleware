@@ -1,9 +1,8 @@
 package aplication.server;
 
+import aplication.IMonitor;
 import aplication.Medicao;
-
-import commonservices.IMonitor;
-import commonservices.TipoGrandeza;
+import aplication.TipoGrandeza;
 
 public class Monitor implements IMonitor {
 	

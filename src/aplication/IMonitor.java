@@ -1,6 +1,5 @@
-package commonservices;
+package aplication;
 
-import aplication.Medicao;
 
 public interface IMonitor {
 	

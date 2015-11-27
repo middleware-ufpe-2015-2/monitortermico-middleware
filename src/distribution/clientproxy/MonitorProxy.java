@@ -1,9 +1,8 @@
 package distribution.clientproxy;
 
+import aplication.IMonitor;
 import aplication.Medicao;
-
-import commonservices.IMonitor;
-import commonservices.TipoGrandeza;
+import aplication.TipoGrandeza;
 
 public class MonitorProxy extends ClientProxy implements IMonitor {
 
