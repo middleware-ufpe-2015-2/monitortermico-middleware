@@ -1,10 +1,8 @@
-package infrastructure.serverrequesthandler.http;
-
-import infrastructure.serverrequesthandler.ServerRequestHandler;
+package infrastructure.serverrequesthandler;
 
 import java.io.IOException;
 
-public class HTTPServerRequestHandler extends ServerRequestHandler {
+public abstract class ServerRequestHandler implements IServerRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {

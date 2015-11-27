@@ -1,10 +1,10 @@
 package infrastructure.serverrequesthandler.udp;
 
-import infrastructure.serverrequesthandler.IServerRequestHandler;
+import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
 
-public class UDPServerRequestHandler implements IServerRequestHandler {
+public class UDPServerRequestHandler extends ServerRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {

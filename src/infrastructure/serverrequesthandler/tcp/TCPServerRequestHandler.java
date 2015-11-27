@@ -1,10 +1,10 @@
 package infrastructure.serverrequesthandler.tcp;
 
-import infrastructure.serverrequesthandler.IServerRequestHandler;
+import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
 
-public class TCPServerRequestHandler implements IServerRequestHandler {
+public class TCPServerRequestHandler extends ServerRequestHandler {
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {
