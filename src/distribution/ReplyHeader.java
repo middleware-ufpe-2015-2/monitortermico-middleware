@@ -9,6 +9,9 @@ public class ReplyHeader implements Serializable {
 	private String serviceContext;
 	private int requestId;
 	private int replyStatus;
+	public ReplyHeader(String string, int i, int j) {
+		// TODO Auto-generated constructor stub
+	}
 	public String getServiceContext() {
 		return serviceContext;
 	}

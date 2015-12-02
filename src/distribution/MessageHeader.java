@@ -6,6 +6,14 @@ public class MessageHeader implements Serializable {
 
 	private static final long serialVersionUID = 1989256266404640637L;
 	
+	public MessageHeader(){
+		super();
+	}
+	
+	public MessageHeader(String string, int i, int j) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	private String magic;
 	private int version;
 	private boolean byteOrder;

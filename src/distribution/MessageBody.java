@@ -11,6 +11,10 @@ public class MessageBody implements Serializable {
 	private ReplyHeader replyHeader;
 	private ReplyBody replyBody;
 
+	public MessageBody(Object object, Object object2, ReplyHeader replyHeader2,
+			ReplyBody replyBody2) {
+		// TODO Auto-generated constructor stub
+	}
 	public RequestHeader getRequestHeader() {
 		return requestHeader;
 	}

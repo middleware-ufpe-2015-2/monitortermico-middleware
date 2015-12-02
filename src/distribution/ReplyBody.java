@@ -8,6 +8,10 @@ public class ReplyBody implements Serializable {
 	
 	private Object operationResult;
 
+	public ReplyBody(Object result) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Object getOperationResult() {
 		return operationResult;
 	}

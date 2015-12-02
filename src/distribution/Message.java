@@ -6,8 +6,18 @@ public class Message implements Serializable{
 
 	private static final long serialVersionUID = 2743117559646953358L;
 	
+	public Message(){
+		super();
+	}
+	
+	public Message(MessageHeader messageHeader, MessageBody messageBody) {
+		this.header = messageHeader;
+		this.body = messageBody;
+	}
+	
 	private MessageHeader header;
 	private MessageBody body;
+
 	public MessageHeader getHeader() {
 		return header;
 	}
