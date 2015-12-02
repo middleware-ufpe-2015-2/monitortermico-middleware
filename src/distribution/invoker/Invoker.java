@@ -1,3 +1,10 @@
+import java.io.IOException;
+
+import javax.xml.bind.Marshaller;
+
+import distribution.Termination;
+import distribution.clientproxy.ClientProxy;
+
 public class Invoker implements IInvoker{
 
 	public void invoke(ClientProxy clientProxy) throws IOException, Throwable {
