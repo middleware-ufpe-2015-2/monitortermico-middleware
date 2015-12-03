@@ -1,4 +1,4 @@
-package aplication.client;
+package aplication.client.console;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
