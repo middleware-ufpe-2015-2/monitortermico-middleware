@@ -18,13 +18,13 @@ import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
 import distribution.marshaller.Marshaller;
 
-public class Invoker implements IInvoker {
+public class MonitorInvoker extends AbstractInvoker {
 
-	public Invoker() {
+	public MonitorInvoker() {
 		super();
 	}
 
-	public Invoker(ServerRequestHandlerType type) {
+	public MonitorInvoker(ServerRequestHandlerType type) {
 		if (type.equals(ServerRequestHandlerType.HTTP)) {
 			this.serverRequestHandler = new HTTPServerRequestHandler();
 		} else if (type.equals(ServerRequestHandlerType.TCP)) {
