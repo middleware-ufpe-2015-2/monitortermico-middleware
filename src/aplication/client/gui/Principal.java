@@ -1,5 +1,6 @@
 package aplication.client.gui;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.JTableHeader;
 
 import aplication.Medicao;
 import aplication.client.model.MedicaoTableModel;
@@ -80,13 +82,16 @@ public class Principal {
 		panel.setBorder(new TitledBorder(null, "Medições Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmMonitorTermico.getContentPane().add(panel);
-		panel.setLayout(null);
+		panel.setLayout(new BorderLayout());
 		
 		//add table
 		table = new JTable();
 		table.setBounds(6, 16, 398, 187);
-		panel.add(table);
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		JTableHeader header = table.getTableHeader();
 		table.setModel(tableModel);
+		
+		panel.add(header, BorderLayout.NORTH);
+		panel.add(table, BorderLayout.CENTER);
 	}
 }
