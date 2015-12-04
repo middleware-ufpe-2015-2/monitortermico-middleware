@@ -1,10 +1,6 @@
 package distribution.requestor;
 
 import infrastructure.clientrequesthandler.ClientRequestHandler;
-import infrastructure.clientrequesthandler.ClientRequestHandlerType;
-import infrastructure.clientrequesthandler.http.HttpClientProxyRequestHandler;
-import infrastructure.clientrequesthandler.tcp.TCPClientRequestHandler;
-import infrastructure.clientrequesthandler.udp.UDPClientRequestHandler;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -16,17 +12,6 @@ public class Requestor implements IRequestor {
 	
 	public Requestor() {
 		super();
-	}
-
-	public Requestor(ClientRequestHandlerType crhType) {
-		super();
-		if(crhType.equals(ClientRequestHandlerType.HTTP)){
-			setCrh(new HttpClientProxyRequestHandler());
-		} else if(crhType.equals(ClientRequestHandlerType.TCP)){
-			setCrh(new TCPClientRequestHandler());
-		} else if(crhType.equals(ClientRequestHandlerType.UDP)){
-			setCrh(new UDPClientRequestHandler());
-		}
 	}
 
 	private ClientRequestHandler crh;

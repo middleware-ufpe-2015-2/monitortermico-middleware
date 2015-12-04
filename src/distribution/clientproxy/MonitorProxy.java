@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import distribution.requestor.Requestor;
-import distribution.Invocation;
-import distribution.Termination;
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
+import distribution.Invocation;
+import distribution.Termination;
+import distribution.requestor.Requestor;
 
 public class MonitorProxy extends ClientProxy implements IMonitor {
 
@@ -18,6 +18,10 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	public MonitorProxy(String h, int p) {
 		this.host = h;
 		this.port = p;
+	}
+
+	public MonitorProxy() {
+		super();
 	}
 
 	@Override

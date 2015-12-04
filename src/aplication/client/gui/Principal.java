@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +21,8 @@ import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
+
+import commonservices.naming.NamingProxy;
 
 public class Principal {
 
@@ -70,14 +72,13 @@ public class Principal {
 			public void actionPerformed(ActionEvent e) {
 				try{
 					//TODO: utilizar o servico de nomes a ser desenvolvido
-					Registry registry = LocateRegistry.getRegistry("localhost", 8080);
+					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
 					
 					//TODO: subsituir pelo padrao lookup
-					IMonitor monitor = (IMonitor) registry.lookup("Monitor");				
+					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
 					
 					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
 					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
-					
 					
 					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
 					System.out.println("Temperatura: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
@@ -87,6 +88,12 @@ public class Principal {
 					System.out.println(re.getMessage());
 				} catch (NotBoundException nbe) {
 					System.out.println(nbe.getMessage());
+				} catch (UnknownHostException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
 				}
 			}
 		});

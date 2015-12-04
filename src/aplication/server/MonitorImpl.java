@@ -1,10 +1,12 @@
 package aplication.server;
 
+import java.rmi.Remote;
+
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
 
-public class Monitor implements IMonitor {
+public class MonitorImpl implements IMonitor, Remote {
 	
 	private Medicao medicao;
 

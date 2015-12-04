@@ -1,10 +1,6 @@
 package distribution.invoker;
 
 import infrastructure.serverrequesthandler.ServerRequestHandler;
-import infrastructure.serverrequesthandler.ServerRequestHandlerType;
-import infrastructure.serverrequesthandler.http.HTTPServerRequestHandler;
-import infrastructure.serverrequesthandler.tcp.TCPServerRequestHandler;
-import infrastructure.serverrequesthandler.udp.UDPServerRequestHandler;
 
 import java.io.IOException;
 
@@ -22,16 +18,6 @@ public class MonitorInvoker extends AbstractInvoker {
 
 	public MonitorInvoker() {
 		super();
-	}
-
-	public MonitorInvoker(ServerRequestHandlerType type) {
-		if (type.equals(ServerRequestHandlerType.HTTP)) {
-			this.serverRequestHandler = new HTTPServerRequestHandler();
-		} else if (type.equals(ServerRequestHandlerType.TCP)) {
-			this.serverRequestHandler = new TCPServerRequestHandler();
-		} else if (type.equals(ServerRequestHandlerType.UDP)) {
-			this.serverRequestHandler = new UDPServerRequestHandler();
-		}
 	}
 
 	private ServerRequestHandler serverRequestHandler;
