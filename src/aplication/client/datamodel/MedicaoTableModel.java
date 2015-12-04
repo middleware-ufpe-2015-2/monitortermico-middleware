@@ -1,4 +1,4 @@
-package aplication.client.model;
+package aplication.client.datamodel;
 
 import java.util.ArrayList;
 import java.util.List;

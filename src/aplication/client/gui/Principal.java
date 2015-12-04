@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,8 +17,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.JTableHeader;
 
+import aplication.IMonitor;
 import aplication.Medicao;
-import aplication.client.model.MedicaoTableModel;
+import aplication.TipoGrandeza;
+import aplication.client.datamodel.MedicaoTableModel;
 
 public class Principal {
 
@@ -62,17 +68,26 @@ public class Principal {
 		JButton btnNewButton = new JButton("Realizar Medi\u00E7\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO: pegar o codigo do ClientMonitor para inserir na acao do botao 
-				Medicao m1 = new Medicao();
-				if(Math.random() > 0.5){
-					m1.setGrandeza("Temperatura");
-					m1.setUnidade("Celsius");
-				} else {
-					m1.setGrandeza("Umidade");
-					m1.setUnidade("kg/cm³");					
+				try{
+					//TODO: utilizar o servico de nomes a ser desenvolvido
+					Registry registry = LocateRegistry.getRegistry("localhost", 8080);
+					
+					//TODO: subsituir pelo padrao lookup
+					IMonitor monitor = (IMonitor) registry.lookup("Monitor");				
+					
+					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
+					
+					
+					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
+					System.out.println("Temperatura: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
+					
+					tableModel.inserir(m1);
+				} catch (RemoteException re){
+					System.out.println(re.getMessage());
+				} catch (NotBoundException nbe) {
+					System.out.println(nbe.getMessage());
 				}
-				m1.setValue((float) (Math.round(Math.random()*100)));
-				tableModel.inserir(m1);
 			}
 		});
 		btnNewButton.setBounds(10, 11, 200, 23);
