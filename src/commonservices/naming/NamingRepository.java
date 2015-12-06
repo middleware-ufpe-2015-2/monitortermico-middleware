@@ -9,5 +9,13 @@ public class NamingRepository {
 	public NamingRepository(){
 		
 	}
+	
+	public ArrayList<NamingRecord> getNamingRecord() {
+		return namingRecord;
+	}
+
+	public void setNamingRecord(ArrayList<NamingRecord> namingRecord) {
+		this.namingRecord = namingRecord;
+	}
 
 }
