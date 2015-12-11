@@ -37,8 +37,41 @@ public class MonitorInvoker extends AbstractInvoker {
 
 			unmarshaledMsg = marshaller.unmarshall(msgToBeUnmarshaled);
 			Message _add_msgToBeMarshalled;
+			
+			String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
+			Method method = remoteObj.getClass().getMethod(operation, null);
 
-			switch (unmarshaledMsg.getBody().getRequestHeader().getOperation()) {
+			//Verificar com Nelson se o uso do Reflection ta correto;
+			try{
+				Object res = method.invoke(remoteObj, null);			
+				
+				if(operation.contais("set")){
+					_add_msgToBeMarshalled = new Message(new MessageHeader(
+						"protocolo", 0, 0), new MessageBody(null, null,
+						new ReplyHeader("", 0, 0), new ReplyBody(
+								"Set Succeeded")));
+				}else{
+					ter.setResult(res);
+					_add_msgToBeMarshalled = new Message(new MessageHeader(
+						"protocolo", 0, 0), new MessageBody(null, null,
+						new ReplyHeader("", 0, 0), new ReplyBody(
+								ter.getResult())));
+				}
+
+				// Marshalling the response
+				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
+
+				// sending response
+				serverRequestHandler.send(marshalledMsg);
+
+			}catch(Exception e){
+				_add_msgToBeMarshalled = new Message(new MessageHeader(
+						"protocolo", 0, 0), new MessageBody(null, null,
+						new ReplyHeader("", 0, 0), new ReplyBody(
+								e.Message)));
+			}	
+			
+			/*switch (unmarshaledMsg.getBody().getRequestHeader().getOperation()) {
 			case "getValue":
 				ter.setResult(remoteObj.getValue());
 				_add_msgToBeMarshalled = new Message(new MessageHeader(
@@ -54,7 +87,7 @@ public class MonitorInvoker extends AbstractInvoker {
 				break;
 
 			case "setValue":
-				// Ask Nelson how to do when it's a set method
+				// Ask Nelson how to do it when it's a set method
 				break;
 
 			case "getGrandeza":
@@ -72,7 +105,7 @@ public class MonitorInvoker extends AbstractInvoker {
 				break;
 
 			case "setGrandeza":
-				// Ask Nelson how to do when it's a set method
+				// Ask Nelson how to do it when it's a set method
 				break;
 
 			case "getUnidade":
@@ -92,7 +125,7 @@ public class MonitorInvoker extends AbstractInvoker {
 			case "setUnidade":
 				// Ask Nelson how to do when it's a set method
 				break;
-			}
+			}*/
 		}
 
 	}
