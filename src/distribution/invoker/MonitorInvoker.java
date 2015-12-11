@@ -45,7 +45,7 @@ public class MonitorInvoker extends AbstractInvoker {
 			try{
 				Object res = method.invoke(remoteObj, null);			
 				
-				if(operation.contais("set")){
+				if(operation.contains("set")){
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
