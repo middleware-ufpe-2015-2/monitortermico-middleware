@@ -31,8 +31,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * e não um objeto do tipo 'CalculatorProxy', como nas implementa-
 		 * ções exemplo postas pelo professor
 		 **/
-		
-		
+				
 		/**
 		 * Processo de invocação
 		 */
@@ -71,9 +70,10 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		
 		/**
 		 * Configuração do endereço host do servidor enviado pelo lado servidor da camada
-		 * de aplicação ao namingProxy
+		 * de aplicação ao namingProxy, nome da operação
 		 */
 		
+		invocBind.setOperationName(nomeMetodo);
 		invocBind.setIpAdress(clientProxy.getHost());
 
 		/**
@@ -84,7 +84,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		mapa.add(clientProxy);
 		mapa.add(nomeMetodo);
 		invocBind.setParameters(mapa);
-		invocBind.setOperationName(nomeMetodo);
+		
 		
 		/**
 		 * A invocação é repassada ao resquestor, para então serializar a mensagem pelo marshall
@@ -145,12 +145,10 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 	 * Envia a requisição ao requestor. Na chamada da linha 146 está nula porque
 	 * o requestor não está implementado
 	 */
-		Object objeto = new Object();
-		objeto = requisi.invoke(invocLookup);
+		
+		requisi.invoke(invocLookup);
 		
 		return AOR;
-		
-		
 	}
 
 	@Override
