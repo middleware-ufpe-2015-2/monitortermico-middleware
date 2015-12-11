@@ -31,14 +31,26 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * e não um objeto do tipo 'CalculatorProxy', como nas implementa-
 		 * ções exemplo postas pelo professor
 		 **/
-				
-		Invocation invocacao = new Invocation();
+		
+		
+		/**
+		 * Processo de invocação
+		 */
+		Invocation invocBind = new Invocation();
+		
+		/**
+		 * Arraylist que conterá os parâmetro
+		 */
 		ArrayList<Object> mapa = new ArrayList<Object>();
-		class Local{
+				
+		class Local
+		{
+			
 		}
 		;
 		// Recuperação do nome do próprio método
 		String nomeMetodo = Local.class.getEnclosingMethod().getName();
+		
 		Requestor requisicao = new Requestor();
 				
 		/**
@@ -47,7 +59,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * pelo servidar na camada de aplicação.
 		 */
 		
-		invocacao.setPortNumber(clientProxy.getPort());
+		invocBind.setPortNumber(clientProxy.getPort());
 		
 		/**
 		 * Configuração do objetoId enviado ao objeto remoto por meio da configura
@@ -55,14 +67,14 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * invocará o método 'bind' de NamingProxy  
 		 */
 		
-		invocacao.setObjectId(clientProxy.getObjectId());
+		invocBind.setObjectId(clientProxy.getObjectId());
 		
 		/**
 		 * Configuração do endereço host do servidor enviado pelo lado servidor da camada
 		 * de aplicação ao namingProxy
 		 */
 		
-		invocacao.setIpAdress(clientProxy.getHost());
+		invocBind.setIpAdress(clientProxy.getHost());
 
 		/**
 		 * introdução ao objeto ArrayList 'mapa' de alguns parâmetros contidos no 'ClientProxy',
@@ -71,23 +83,74 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		
 		mapa.add(clientProxy);
 		mapa.add(nomeMetodo);
-		invocacao.setParameters(mapa);
-		invocacao.setOperationName(nomeMetodo);
+		invocBind.setParameters(mapa);
+		invocBind.setOperationName(nomeMetodo);
 		
 		/**
 		 * A invocação é repassada ao resquestor, para então serializar a mensagem pelo marshall
 		 * e ser enviada pela reade. 
 		 */
-		requisicao.invoke(invocacao);
-		
-		
+		requisicao.invoke(invocBind);
 	}
 
 	@Override
 	public ClientProxy lookup(String serviceName) throws UnknownHostException,
 			IOException, Throwable {
 		// TODO Auto-generated method stub
-		return null;
+		
+		
+	/**
+	 * O retorno será pensado como uma AOR. Tomar-se-á em conta que o lookup
+	 * necessita apenas de setar o nome de serviço ('lookup') no invocation e o 
+	 * nome do tipo de serviço a ser buscado no servidor ('no caso, conversão').
+	 * Ao final, o invocation será repassado ao requestor.
+	 */
+		ClientProxy AOR = new ClientProxy();
+		
+	/**
+	 * Instanciação da invocação que será trabalhada pelo requestor
+	 */
+		Invocation invocLookup = new Invocation();
+		
+	/**
+	 * Isntanciação do requestor que irá receber a requisição
+	 */
+		
+		Requestor requisi = new Requestor();
+	
+	/**
+	 *Estrutura de dado que irá ser enviado ao requestor
+	 */
+		
+		ArrayList<Object> parametros = new ArrayList();
+		
+	/**
+	 * Preparação para o reflexion
+	 */
+		class Local{
+		}
+		;
+	/**
+	 * envia o nome do método ao requestor
+	 */
+		String nomeMetod = Local.class.getEnclosingMethod().getName();
+		parametros.add(nomeMetod);
+	/**
+	 * Configuração dos parâmetros retornados 
+	 */
+		invocLookup.setParameters(parametros);
+		invocLookup.setOperationName(serviceName);
+		
+	/** 
+	 * Envia a requisição ao requestor. Na chamada da linha 146 está nula porque
+	 * o requestor não está implementado
+	 */
+		Object objeto = new Object();
+		objeto = requisi.invoke(invocLookup);
+		
+		return AOR;
+		
+		
 	}
 
 	@Override
@@ -96,5 +159,24 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	/** Para testar os métodos, descomente os códigos abaixo
+	 * 
+	 *
+	 
+	public static void main(String args[]) throws UnknownHostException, IOException, Throwable
+	{
+		ClientProxy cliente = new ClientProxy();
+		
+		NamingProxy nomes = new NamingProxy("localHost",1313);
+		
+		nomes.bind("ransdutor", cliente);
+		
+		String  transdutor = "conversao";
+		
+		nomes.lookup(transdutor);
+	}
+	*/
 
 }
