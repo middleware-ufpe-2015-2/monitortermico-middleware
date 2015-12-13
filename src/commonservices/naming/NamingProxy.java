@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import distribution.Invocation;
+import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
 import distribution.requestor.Requestor;
 
@@ -94,18 +95,20 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 	}
 
 	@Override
-	public ClientProxy lookup(String serviceName) throws UnknownHostException,
+	public Termination lookup(String serviceName) throws UnknownHostException,
 			IOException, Throwable {
 		// TODO Auto-generated method stub
 		
 		
 	/**
-	 * O retorno será pensado como uma AOR. Tomar-se-á em conta que o lookup
+	 * O retorno será pensado como uma AOR. Como o termination está pensado co
+	 * mo o termination está codificado para retornar um objeto geral, esse objeto 
+	 * será considerado um AOR. Tomar-se-á em conta que o lookup
 	 * necessita apenas de setar o nome de serviço ('lookup') no invocation e o 
 	 * nome do tipo de serviço a ser buscado no servidor ('no caso, conversão').
 	 * Ao final, o invocation será repassado ao requestor.
 	 */
-		ClientProxy AOR = new ClientProxy();
+		Termination AOR = new Termination();
 		
 	/**
 	 * Instanciação da invocação que será trabalhada pelo requestor
@@ -146,7 +149,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 	 * o requestor não está implementado
 	 */
 		
-		requisi.invoke(invocLookup);
+		AOR = requisi.invoke(invocLookup);
 		
 		return AOR;
 	}
@@ -154,8 +157,57 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 	@Override
 	public ArrayList<String> list() throws UnknownHostException, IOException,
 			Throwable {
-		// TODO Auto-generated method stub
-		return null;
+		
+		/**
+		 * Instanciação da invocação
+		 */
+		Invocation invList = new Invocation();
+		
+		/**
+		 * Instanciação do resultado
+		 */
+		Termination terList = new Termination();
+		
+		/**
+		 *Instanciação do retorno 
+		 */
+		ArrayList resultado = new ArrayList();
+		
+		/**
+		 * Instanciação do Requestos
+		 */
+		
+		Requestor requiList = new Requestor();
+		
+		/**
+		 * Classe local
+		 */
+		class Local{
+			
+		}
+		;
+		
+		/**
+		 * Reflexão. Invoca o próprio nome do método
+		 */
+		String nomList = Local.class.getEnclosingMethod().getName();
+		
+		/**
+		 * configuração da invocação
+		 */
+		invList.setOperationName(nomList);
+		
+		/**
+		 * Envio da invocação ao requestor e atribuição do retorno ao
+		 * termination 'terList'
+		 */
+		
+		terList = requiList.invoke(invList);
+		  
+		 /**
+		 * retorno do resultado
+		 */
+		return (ArrayList) terList.getResult();
 	}
 	
 	
@@ -169,7 +221,9 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		
 		NamingProxy nomes = new NamingProxy("localHost",1313);
 		
-		nomes.bind("ransdutor", cliente);
+		nomes.bind("transdutor", cliente);
+		
+		nomes.bind("Calculadora",cliente);
 		
 		String  transdutor = "conversao";
 		

@@ -20,7 +20,8 @@ public class Requestor implements IRequestor {
 	public Termination invoke(Invocation inv) throws UnknownHostException,
 			IOException, Throwable {
 		// TODO Auto-generated method stub
-		return null;
+		Termination ter= new Termination();
+		return ter;
 	}
 
 	public ClientRequestHandler getCrh() {
