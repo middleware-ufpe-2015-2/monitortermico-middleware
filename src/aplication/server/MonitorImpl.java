@@ -1,6 +1,8 @@
 package aplication.server;
 
 import java.rmi.Remote;
+import java.util.ArrayList;
+import java.util.List;
 
 import aplication.IMonitor;
 import aplication.Medicao;
@@ -9,6 +11,7 @@ import aplication.TipoGrandeza;
 public class MonitorImpl implements IMonitor, Remote {
 	
 	private Medicao medicao;
+	private List<Medicao> medicoes = new ArrayList<Medicao>();
 
 	@Override
 	public Medicao getMedicao(TipoGrandeza tipo) {
@@ -21,12 +24,27 @@ public class MonitorImpl implements IMonitor, Remote {
 			medicao.setUnidade("Kg/m³");
 		}
 		medicao.setValue((float) (Math.random()*100));
+		this.medicoes.add(medicao);
 		return this.medicao;
 	}
 
 	@Override
 	public void setmedicao(Medicao m) {
 		this.medicao = m;
+	}
+
+	@Override
+	public Medicao getMedicaoAnterior() {
+		return this.medicao;
+	}
+
+	@Override
+	public List<Medicao> getCincoUltimasMedicoes() {
+		if(medicoes.size() > 5){
+			return medicoes.subList(medicoes.size()-1, medicoes.size()-5);
+		} else {
+			return medicoes;
+		}
 	}
 
 }

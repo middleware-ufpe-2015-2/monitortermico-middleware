@@ -3,6 +3,7 @@ package distribution.invoker;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import aplication.Medicao;
 import distribution.Message;
@@ -68,7 +69,7 @@ public class MonitorInvoker extends AbstractInvoker {
 				_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
-								e.Message)));
+								e.getMessage())));
 			}	
 			
 			/*switch (unmarshaledMsg.getBody().getRequestHeader().getOperation()) {
