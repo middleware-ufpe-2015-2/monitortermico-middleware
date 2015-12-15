@@ -37,5 +37,52 @@ public class NamingRepository {
 	public void setNamingRecord(String nomeServico,ClientProxy AOR) {
 		namingRecord.put(nomeServico,AOR);
 	}
+	
+	
+	/**
+	 * Serviço de Bind 
+	 * @param nomeServico
+	 * @param AOR
+	 */
+	public void bind(String nomeServico, ClientProxy AOR)
+	{
+		namingRecord.put(nomeServico, AOR);
+	}
+	
+	/**
+	 * serviço de lookup
+	 * @param nomeServico
+	 * @return
+	 */
+	
+	public ClientProxy lookup(String nomeServico)
+	{
+		ClientProxy retornoLook = new ClientProxy();
+		
+		if (this.namingRecord.containsKey(nomeServico))
+		{
+			retornoLook = (ClientProxy)this.namingRecord.get(nomeServico);
+		}
+		else
+		{
+			retornoLook.setHost("servico nao existe");
+			
+			retornoLook.setObjectId(000000);
+		}
+		
+		return retornoLook;
+	}
+	
+	/**
+	 * Listamgem dos serviços existentes no serviço de nomes
+	 */
+	public ArrayList<String> list()
+	{
+		ArrayList retorList = new ArrayList();
+		
+		retorList = (ArrayList) this.namingRecord.keySet();
+		
+		return retorList;
+	}
 
 }
