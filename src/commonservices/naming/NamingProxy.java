@@ -82,8 +82,8 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * como o nome do método e do objeto 'clientProxy'
 		 */
 		
-		mapa.add(clientProxy);
 		mapa.add(nomeMetodo);
+		mapa.add(clientProxy);
 		invocBind.setParameters(mapa);
 		
 		
@@ -143,6 +143,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 	 */
 		invocLookup.setParameters(parametros);
 		invocLookup.setOperationName(serviceName);
+		parametros.add(invocLookup);
 		
 	/** 
 	 * Envia a requisição ao requestor. Na chamada da linha 146 está nula porque
@@ -203,11 +204,17 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 */
 		
 		terList = requiList.invoke(invList);
-		  
+		
+		/**
+		 * Obtenção do ArrayList listando os serviços a partir do Termination 'terList'
+		 */
+		
+		resultado = (ArrayList)terList.getResult();
+				  
 		 /**
 		 * retorno do resultado
 		 */
-		return (ArrayList) terList.getResult();
+		return resultado;
 	}
 	
 	
