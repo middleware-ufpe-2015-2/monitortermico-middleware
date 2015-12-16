@@ -11,6 +11,21 @@ public class RequestHeader implements Serializable {
 	private boolean responseExpected;
 	private int objectKey;
 	private String operation;
+	
+	public RequestHeader(){
+		
+	}
+	
+	public RequestHeader(String context, int requestId, boolean response, int objKey,
+			String operationName) {
+		super();
+		this.context = context;
+		this.requestId = requestId;
+		this.responseExpected = response;
+		this.objectKey = objKey;
+		this.operation = operationName;
+	}
+	
 	public String getContext() {
 		return context;
 	}

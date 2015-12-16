@@ -2,7 +2,11 @@ package infrastructure.clientrequesthandler;
 
 import java.io.IOException;
 
-public abstract class ClientRequestHandler implements IClientRequestHandler {
+public class ClientRequestHandler implements IClientRequestHandler {
+
+	public ClientRequestHandler(String host, int port) {
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void send(byte[] message) throws IOException, InterruptedException {
