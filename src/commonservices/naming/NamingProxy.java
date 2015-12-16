@@ -59,7 +59,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * pelo servidar na camada de aplicação.
 		 */
 		
-		invocBind.setPortNumber(clientProxy.getPort());
+//		invocBind.setPortNumber(clientProxy.getPort());
 		
 		/**
 		 * Configuração do objetoId enviado ao objeto remoto por meio da configura
@@ -67,7 +67,7 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 * invocará o método 'bind' de NamingProxy  
 		 */
 		
-		invocBind.setObjectId(clientProxy.getObjectId());
+//		invocBind.setObjectId(clientProxy.getObjectId());
 		
 		/**
 		 * Configuração do endereço host do servidor enviado pelo lado servidor da camada
@@ -75,7 +75,8 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		 */
 		
 		invocBind.setOperationName(nomeMetodo);
-		invocBind.setIpAdress(clientProxy.getHost());
+		invocBind.setClientProxy(clientProxy);
+//		invocBind.setIpAdress(clientProxy.getHost());
 
 		/**
 		 * introdução ao objeto ArrayList 'mapa' de alguns parâmetros contidos no 'ClientProxy',

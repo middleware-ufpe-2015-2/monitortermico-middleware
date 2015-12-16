@@ -10,8 +10,12 @@ public class MessageHeader implements Serializable {
 		super();
 	}
 	
-	public MessageHeader(String string, int i, int j) {
-		// TODO Auto-generated constructor stub
+	public MessageHeader(String magic, int v, boolean order, int type, long size) {
+		this.magic = magic;
+		this.version = v;
+		this.byteOrder = order;
+		this.messageType = type;
+		this.messageSize = size;
 	}
 	
 	private String magic;

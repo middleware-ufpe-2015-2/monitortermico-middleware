@@ -3,6 +3,7 @@ package distribution.clientproxy;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.List;
 
 import aplication.IMonitor;
 import aplication.Medicao;
@@ -42,7 +43,8 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		parameters.add(tipo);
 				
 		// preenche os parâmetros da chamada
-		inv.setIpAdress(this.getHost());
+		inv.getClientProxy().setHost(this.getHost());
+		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
 		
@@ -68,7 +70,6 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public void setmedicao(Medicao m) {
 		
-		
 		//preparando as variáveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
@@ -84,7 +85,8 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		parameters.add(m);
 				
 		// information sent to Requestor
-		inv.setIpAdress(this.getHost());
+		inv.getClientProxy().setHost(this.getHost());
+		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
 		
@@ -104,6 +106,18 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Medicao getMedicaoAnterior() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Medicao> getCincoUltimasMedicoes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

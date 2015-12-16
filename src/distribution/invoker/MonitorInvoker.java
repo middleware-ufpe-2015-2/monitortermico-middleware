@@ -3,6 +3,7 @@ package distribution.invoker;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 import aplication.Medicao;
 import distribution.Message;
@@ -47,13 +48,13 @@ public class MonitorInvoker extends AbstractInvoker {
 				
 				if(operation.contains("set")){
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
+						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
 								"Set Succeeded")));
 				}else{
 					ter.setResult(res);
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
+						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
 								ter.getResult())));
 				}
@@ -66,66 +67,10 @@ public class MonitorInvoker extends AbstractInvoker {
 
 			}catch(Exception e){
 				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
+						"protocolo", 0, false, 1, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
-								e.Message)));
-			}	
-			
-			/*switch (unmarshaledMsg.getBody().getRequestHeader().getOperation()) {
-			case "getValue":
-				ter.setResult(remoteObj.getValue());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setValue":
-				// Ask Nelson how to do it when it's a set method
-				break;
-
-			case "getGrandeza":
-				ter.setResult(remoteObj.getGrandeza());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setGrandeza":
-				// Ask Nelson how to do it when it's a set method
-				break;
-
-			case "getUnidade":
-				ter.setResult(remoteObj.getUnidade());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setUnidade":
-				// Ask Nelson how to do when it's a set method
-				break;
-			}*/
+								e.getMessage())));
+			}
 		}
 
 	}

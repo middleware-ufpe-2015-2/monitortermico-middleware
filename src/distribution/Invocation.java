@@ -3,33 +3,21 @@ package distribution;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import distribution.clientproxy.ClientProxy;
+
 public class Invocation implements Serializable {
 
 	private static final long serialVersionUID = -4877269674908616498L;
 	
-	private String ipAdress;
-	private int portNumber;
-	private int objectId;
+	private ClientProxy clientProxy;
 	private String operationName;
 	private ArrayList<Object> parameters;
 
-	public String getIpAdress() {
-		return ipAdress;
+	public ClientProxy getClientProxy() {
+		return clientProxy;
 	}
-	public void setIpAdress(String ipAdress) {
-		this.ipAdress = ipAdress;
-	}
-	public int getPortNumber() {
-		return portNumber;
-	}
-	public void setPortNumber(int portNumber) {
-		this.portNumber = portNumber;
-	}
-	public int getObjectId() {
-		return objectId;
-	}
-	public void setObjectId(int objectId) {
-		this.objectId = objectId;
+	public void setClientProxy(ClientProxy clientProxy) {
+		this.clientProxy = clientProxy;
 	}
 	public String getOperationName() {
 		return operationName;
