@@ -70,63 +70,7 @@ public class MonitorInvoker extends AbstractInvoker {
 						"protocolo", 0, 0), new MessageBody(null, null,
 						new ReplyHeader("", 0, 0), new ReplyBody(
 								e.getMessage())));
-			}	
-			
-			/*switch (unmarshaledMsg.getBody().getRequestHeader().getOperation()) {
-			case "getValue":
-				ter.setResult(remoteObj.getValue());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setValue":
-				// Ask Nelson how to do it when it's a set method
-				break;
-
-			case "getGrandeza":
-				ter.setResult(remoteObj.getGrandeza());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setGrandeza":
-				// Ask Nelson how to do it when it's a set method
-				break;
-
-			case "getUnidade":
-				ter.setResult(remoteObj.getUnidade());
-				_add_msgToBeMarshalled = new Message(new MessageHeader(
-						"protocolo", 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
-
-				// Marshalling the response
-				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
-
-				// sending response
-				serverRequestHandler.send(marshalledMsg);
-				break;
-
-			case "setUnidade":
-				// Ask Nelson how to do when it's a set method
-				break;
-			}*/
+			}
 		}
 
 	}

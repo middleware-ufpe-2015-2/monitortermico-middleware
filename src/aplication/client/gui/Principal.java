@@ -71,19 +71,18 @@ public class Principal {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try{
-					//TODO: utilizar o servico de nomes a ser desenvolvido
 					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
 					
-					//TODO: subsituir pelo padrao lookup
 					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
 					
 					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
 					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
 					
 					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
-					System.out.println("Temperatura: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
+					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
 					
 					tableModel.inserir(m1);
+					tableModel.inserir(m2);
 				} catch (RemoteException re){
 					System.out.println(re.getMessage());
 				} catch (NotBoundException nbe) {
