@@ -2,6 +2,8 @@ package commonservices.naming;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import distribution.clientproxy.ClientProxy;
 
@@ -78,11 +80,68 @@ public class NamingRepository {
 	 */
 	public ArrayList<String> list()
 	{
-		ArrayList retorList = new ArrayList();
+		ArrayList<String> retorList = new ArrayList();
 		
-		retorList = (ArrayList) this.namingRecord.keySet();
+		Set<String> x = this.namingRecord.keySet();
+		
+		Iterator<String> it = x.iterator(); 
+		
+		while(it.hasNext())
+		{
+			String atri = it.next();
+			
+			retorList.add(atri);
+		}
 		
 		return retorList;
 	}
+	
+	/**
+	 * Teste da classe
+	 * 
+	public static void main(String[] args)
+	{
+		NamingRepository repositorio = new NamingRepository();
+		
+		ClientProxy proxy = new ClientProxy();
+		
+		ClientProxy proxy2 = new ClientProxy();
+		
+		ClientProxy proxy3 = new ClientProxy();
+		
+		proxy.setHost("local");
+		
+		proxy.setObjectId(2222);
+		
+		proxy.setPort(65655);
+		
+		proxy2.setHost("local");
+		
+		proxy2.setObjectId(2223);
+		
+		proxy2.setPort(65656);
+		
+		proxy3.setHost("local");
+		
+		proxy3.setObjectId(2224);
+		
+		proxy3.setPort(6565);
+		
+		repositorio.setNamingRecord("Conversor", proxy);
+		
+		repositorio.bind("calculador", proxy);
+		
+		repositorio.bind("converso", proxy2);
+		
+		repositorio.bind("matematica", proxy3);
+		
+		repositorio.list();
+		
+		repositorio.lookup("calculadora");
+		
+		repositorio.lookup("calculador");
+		
+	}
+	*/
 
 }
