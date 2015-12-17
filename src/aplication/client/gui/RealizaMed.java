@@ -24,33 +24,18 @@ import aplication.client.datamodel.MedicaoTableModel;
 
 import commonservices.naming.NamingProxy;
 
-public class Principal {
+public class RealizaMed {
 
 	private JFrame frmMonitorTermico;
 	private JTable table;
 	private MedicaoTableModel tableModel;
 	private JPanel panel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Principal window = new Principal();
-					window.frmMonitorTermico.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
-	public Principal() {
+	public RealizaMed() {
 		initialize();
 	}
 
@@ -70,30 +55,43 @@ public class Principal {
 		JButton btnNewButton = new JButton("Realizar Medi\u00E7\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try{
-					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
-					
-					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
-					
-					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
-					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
-					
-					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
-					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
-					
-					tableModel.inserir(m1);
-					tableModel.inserir(m2);
-				} catch (RemoteException re){
-					System.out.println(re.getMessage());
-				} catch (NotBoundException nbe) {
-					System.out.println(nbe.getMessage());
-				} catch (UnknownHostException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (Throwable e1) {
-					e1.printStackTrace();
-				}
+				
+				//testando se está inserindo na view, código normal comentado abaixo
+				 Medicao m = new Medicao();
+				 m.setValue((float) (Math.random() * 100));
+				 System.out.println("Temp: " + m.getValue());
+				 
+				 m.setGrandeza("30G");
+				 System.out.println("Grand: " + m.getGrandeza());
+				 m.setUnidade("Celsius");
+				 System.out.println("Uni: " + m.getUnidade());
+				 
+				 tableModel.inserir(m);
+				 
+//				try{
+//					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
+//					
+//					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
+//					
+//					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+//					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
+//					
+//					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
+//					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
+//					
+//					tableModel.inserir(m1);
+//					tableModel.inserir(m2);
+//				} catch (RemoteException re){
+//					System.out.println(re.getMessage());
+//				} catch (NotBoundException nbe) {
+//					System.out.println(nbe.getMessage());
+//				} catch (UnknownHostException e1) {
+//					e1.printStackTrace();
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				} catch (Throwable e1) {
+//					e1.printStackTrace();
+//				}
 			}
 		});
 		btnNewButton.setBounds(10, 11, 200, 23);
@@ -114,5 +112,13 @@ public class Principal {
 		
 		panel.add(header, BorderLayout.NORTH);
 		panel.add(table, BorderLayout.CENTER);
+	}
+
+	public JFrame getFrmMonitorTermico() {
+		return frmMonitorTermico;
+	}
+
+	public void setFrmMonitorTermico(JFrame frmMonitorTermico) {
+		this.frmMonitorTermico = frmMonitorTermico;
 	}
 }
