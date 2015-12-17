@@ -1,19 +1,30 @@
 package infrastructure.serverrequesthandler;
 
 import java.io.IOException;
+import infrastructure.plugins.Plugin;
+import infrastructure.plugins.ProtocolType;
 
-public abstract class ServerRequestHandler implements IServerRequestHandler {
+public class ServerRequestHandler {
+	private int port;
+	private Plugin plug;
 
-	@Override
-	public void send(byte[] message) throws IOException, InterruptedException {
-		// TODO Auto-generated method stub
+	public ServerRequestHandler(int port) throws IOException {
+		
+		this.port = port;
+		ProtocolType protocolo = new ProtocolType();
+		plug = protocolo.getProtocol(this.port);
 
 	}
 
-	@Override
-	public byte[] receive() throws IOException, Throwable {
-		// TODO Auto-generated method stub
-		return null;
+	public byte [] receive() throws IOException, Throwable {
+
+		byte [] rcvMsg = null;
+		rcvMsg=plug.receive();				
+		return rcvMsg;
 	}
 
+	public void send(byte [] msg) throws IOException, InterruptedException {
+		plug.send(msg);
+		return;
+	}
 }
