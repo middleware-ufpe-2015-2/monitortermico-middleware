@@ -1,20 +1,29 @@
 package infrastructure.clientrequesthandler;
 
 import java.io.IOException;
+import infrastructure.plugins.Plugin;
+import infrastructure.plugins.ProtocolType;
 
-public class ClientRequestHandler implements IClientRequestHandler {
+public class ClientRequestHandler {
+	
+	private Plugin protocol;
 
-	public ClientRequestHandler(String host, int port) {
-		// TODO Auto-generated constructor stub
+	public ClientRequestHandler(String host, int port) throws IOException {
+		
+		ProtocolType protocolo = new ProtocolType();		
+		protocol = protocolo.getProtocol(host,port);
+
 	}
 
-	@Override
-	public void send(byte[] message) throws IOException, InterruptedException {
+	public void send(byte [] msg) throws IOException, InterruptedException {
+		protocol.send(msg);
 	}
 
-	@Override
-	public byte[] receive() throws IOException, InterruptedException,ClassNotFoundException {
-		return null;
+	public byte [] receive() throws IOException, InterruptedException, ClassNotFoundException {
+		
+		byte [] msg;
+		msg = protocol.receive();
+		return msg;
 	}
 
 }
