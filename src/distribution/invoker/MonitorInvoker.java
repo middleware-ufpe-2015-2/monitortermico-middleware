@@ -2,6 +2,7 @@ package distribution.invoker;
 
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
+import java.awt.image.ReplicateScaleFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
@@ -42,21 +43,22 @@ public class MonitorInvoker extends AbstractInvoker {
 			String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
 			Method method = remoteObj.getClass().getMethod(operation, null);
 
-			//Verificar com Nelson se o uso do Reflection ta correto;
+			
 			try{
-				Object res = method.invoke(remoteObj, null);			
-				
+				Object res = method.invoke(remoteObj, null);	
+				ReplyBody replyBody = new ReplyBody();
 				if(operation.contains("set")){
+					
+					replyBody.setOperationResult("Set Suceeded");
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								"Set Succeeded")));
+						new ReplyHeader("", 0, 0), replyBody));
 				}else{
 					ter.setResult(res);
+					replyBody.setOperationResult(ter.getResult());
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
+						new ReplyHeader("", 0, 0), replyBody));
 				}
 
 				// Marshalling the response
@@ -66,10 +68,11 @@ public class MonitorInvoker extends AbstractInvoker {
 				serverRequestHandler.send(marshalledMsg);
 
 			}catch(Exception e){
+				ReplyBody replyBody = new ReplyBody();
+				replyBody.setOperationResult(e.getMessage());
 				_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 1, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								e.getMessage())));
+						new ReplyHeader("", 0, 0), replyBody));
 			}
 		}
 
