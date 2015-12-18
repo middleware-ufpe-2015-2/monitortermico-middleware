@@ -18,7 +18,6 @@ public class ServerRequestHandler {
 	}
 
 	public byte [] receive() throws IOException, Throwable {
-
 		byte [] rcvMsg = null;
 		rcvMsg=plug.receive();				
 		return rcvMsg;

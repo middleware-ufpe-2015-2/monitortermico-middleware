@@ -1,13 +1,9 @@
 package aplication.client.gui;
 
-import aplication.server.*;
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -41,14 +37,14 @@ public class PrincipalMenu {
 	 */
 	private void go() {
 
-		JFrame frmMonitorTermico = new JFrame("Monitor Térmico");
+		JFrame frmMonitorTermico = new JFrame("Monitor Termico");
 
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu menuOpcoes = new JMenu("Opções");
+		JMenu menuOpcoes = new JMenu("Opcoes");
 
 		JMenuItem menuReaMed = new JMenuItem("Realizar Medições");
-		JMenuItem menuHistMed = new JMenuItem("Histórico de Medições");
+		JMenuItem menuHistMed = new JMenuItem("Historico de Medicoes");
 		JMenuItem menuSair = new JMenuItem("Sair");
 
 		menuSair.addActionListener(new MenuHandler());
@@ -72,7 +68,6 @@ public class PrincipalMenu {
 			public void actionPerformed(ActionEvent arg0) {
 				HistoricoMed historicoMed = new HistoricoMed();
 				historicoMed.getFrmHistoricoMed().setVisible(true);
-
 			}
 
 		});
@@ -85,14 +80,14 @@ public class PrincipalMenu {
 				JOptionPane
 						.showMessageDialog(
 								null,
-								"Sistema Monitor Térmico:"
-										+ "\nO Monitor Térmico é um sistema de controle"
-										+ "\ne gestão onde os usuários podem realizar e"
-										+ "\nvisualizar as medições do equipamento."
+								"Sistema Monitor Termico:"
+										+ "\nO Monitor Termico é um sistema de controle"
+										+ "\ne gestao onde os usuarios podem realizar e"
+										+ "\nvisualizar as medicoes do equipamento."
 										+ "\n"
 										+ "\nDesenvolvimento:"
-										+ "\nTurma de SI-Tópicos5",
-								"Informações", JOptionPane.INFORMATION_MESSAGE);
+										+ "\nTurma de SI-Topicos5",
+								"Informacoes", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 				
@@ -106,7 +101,7 @@ public class PrincipalMenu {
 		frmMonitorTermico.setVisible(true);
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("termometroSol2.png"));
-		JLabel label = new JLabel("Monitor Térmico", icon, SwingConstants.CENTER);
+		JLabel label = new JLabel("Monitor Termico", icon, SwingConstants.CENTER);
 		label.setFont(new Font("Courier", Font.BOLD, 28));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);
