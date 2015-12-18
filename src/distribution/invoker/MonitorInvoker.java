@@ -36,7 +36,7 @@ public class MonitorInvoker extends AbstractInvoker {
 		Marshaller marshaller = new Marshaller();
 		Termination ter = new Termination();
 		Medicao remoteObj = new Medicao();
-		Calendar hora_inicial = new Calendar();
+		Calendar hora_inicial = Calendar.getInstance();
 
 		while (true) {
 			msgToBeUnmarshaled = serverRequestHandler.receive();
@@ -46,6 +46,8 @@ public class MonitorInvoker extends AbstractInvoker {
 			
 			String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
 			Method method = remoteObj.getClass().getMethod(operation, null);
+			
+			QosObserver qosobserver = new QosObserver(); 
 
 			//inicia a contagem do tempo do qos observer
 			hora_inicial = qosobserver.tempo1();

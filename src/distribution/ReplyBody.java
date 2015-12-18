@@ -8,9 +8,13 @@ public class ReplyBody implements Serializable {
 	
 	private Object operationResult;
 
-	/*public ReplyBody(Object result) {
+	public ReplyBody(){
+		
+	}
+	
+	public ReplyBody(Object result) {
 		this.operationResult = result;
-	}*/
+	}
 
 	public Object getOperationResult() {
 		return this.operationResult;
