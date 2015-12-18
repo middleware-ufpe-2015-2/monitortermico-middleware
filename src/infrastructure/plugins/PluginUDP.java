@@ -6,8 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import distribution.Message;
-
 public class PluginUDP extends Plugin {
 
 	private DatagramSocket s = null;

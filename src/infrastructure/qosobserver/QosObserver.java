@@ -1,8 +1,5 @@
 package infrastructure.qosobserver;
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -32,19 +29,19 @@ public abstract class QosObserver implements IQosObserver {
 
 	@Override
 	//Recebe o tempo 1 para comparar com o 2 e resultar em um tempo total
-	public void tempo2(Calendar date) throws IOException, InterruptedException, IOException{
+	public void tempo2(Calendar date) throws IOException, InterruptedException, IOException, ParseException{
 		SimpleDateFormat returnDateSF = new SimpleDateFormat("HHmmssSSS");  
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HHmmssSSS");
 		
 		//Pega o tempo 2 e salva no arquivo
 		Date hora2 = Calendar.getInstance().getTime();
 		//alterando o formato da data e hora 
-		String hr2 = sdf.format(hora2);
+		String hr2 = sdf2.format(hora2);
 		Calendar endDate = Calendar.getInstance();  
 		endDate.setTime(sdf2.parse(hr2));
 		//Salvar o "hora2" no arquivo
 		BufferedWriter buffWrite2 = new BufferedWriter(new FileWriter("../qos_timetable.txt",true));
-		linha = hora2;
+		Date linha = hora2;
 		buffWrite2.append(linha + "\n");
 		buffWrite2.close();	
 		

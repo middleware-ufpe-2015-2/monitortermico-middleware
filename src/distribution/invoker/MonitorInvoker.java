@@ -1,8 +1,8 @@
 package distribution.invoker;
 
+import infrastructure.qosobserver.IQosObserver;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
-import java.awt.image.ReplicateScaleFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -39,6 +39,8 @@ public class MonitorInvoker extends AbstractInvoker {
 		Message unmarshaledMsg = new Message();
 		Marshaller marshaller = new Marshaller();
 		Termination ter = new Termination();
+		Calendar hora_inicial = new Calendar();
+		IQosObserver qosobserver;
 
 		while (true) {
 			msgToBeUnmarshaled = serverRequestHandler.receive();
@@ -83,6 +85,7 @@ public class MonitorInvoker extends AbstractInvoker {
 				String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
 				Method method = remoteObj.getClass().getMethod(operation, null);
 	
+				hora_inicial = qosobserver.tempo1();
 				//Verificar com Nelson se o uso do Reflection ta correto;
 				try{
 					Object res = method.invoke(remoteObj, null);			
@@ -105,6 +108,7 @@ public class MonitorInvoker extends AbstractInvoker {
 	
 					// sending response
 					serverRequestHandler.send(marshalledMsg);
+					qosobserver.tempo2(hora_inicial);
 	
 				}catch(Exception e){
 					_add_msgToBeMarshalled = new Message(new MessageHeader(

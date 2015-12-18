@@ -1,8 +1,9 @@
 package infrastructure.clientrequesthandler;
 
-import java.io.IOException;
 import infrastructure.plugins.Plugin;
 import infrastructure.plugins.ProtocolType;
+
+import java.io.IOException;
 
 public class ClientRequestHandler {
 	

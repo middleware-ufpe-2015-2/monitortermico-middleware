@@ -1,8 +1,9 @@
 package infrastructure.serverrequesthandler;
 
-import java.io.IOException;
 import infrastructure.plugins.Plugin;
 import infrastructure.plugins.ProtocolType;
+
+import java.io.IOException;
 
 public class ServerRequestHandler {
 	private int port;

@@ -1,13 +1,8 @@
 package aplication.client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,12 +12,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.JTableHeader;
 
-import aplication.IMonitor;
 import aplication.Medicao;
-import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
-
-import commonservices.naming.NamingProxy;
 
 public class RealizaMed {
 
