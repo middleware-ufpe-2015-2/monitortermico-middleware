@@ -1,8 +1,6 @@
 package infrastructure.qosobserver;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,8 +8,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public abstract class QosObserver implements IQosObserver {
+public class QosObserver implements IQosObserver {
 
+	public QosObserver() {
+	}
+	
 	@Override
 	public Calendar tempo1() throws IOException, InterruptedException, IOException {
 		 
@@ -33,7 +34,7 @@ public abstract class QosObserver implements IQosObserver {
 	@Override
 	//Recebe o tempo 1 para comparar com o 2 e resultar em um tempo total
 	public void tempo2(Calendar date) throws IOException, InterruptedException, IOException{
-		SimpleDateFormat returnDateSF = new SimpleDateFormat("HHmmssSSS");  
+		SimpleDateFormat sdf = new SimpleDateFormat("HHmmssSSS");  
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HHmmssSSS");
 		
 		//Pega o tempo 2 e salva no arquivo
@@ -41,10 +42,14 @@ public abstract class QosObserver implements IQosObserver {
 		//alterando o formato da data e hora 
 		String hr2 = sdf.format(hora2);
 		Calendar endDate = Calendar.getInstance();  
-		endDate.setTime(sdf2.parse(hr2));
+		try {
+			endDate.setTime(sdf2.parse(hr2));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		//Salvar o "hora2" no arquivo
 		BufferedWriter buffWrite2 = new BufferedWriter(new FileWriter("../qos_timetable.txt",true));
-		linha = hora2;
+		String linha = sdf.format(hora2);
 		buffWrite2.append(linha + "\n");
 		buffWrite2.close();	
 		
@@ -71,7 +76,7 @@ public abstract class QosObserver implements IQosObserver {
 		
 		 */
 
-		String endTime = returnDateSF.format(endDate.getTime());
+		String endTime = sdf.format(endDate.getTime());
 		int tempoTotal = Integer.parseInt(endTime);
 		//resultado em inteiro para colocar no gráfico
 	}
