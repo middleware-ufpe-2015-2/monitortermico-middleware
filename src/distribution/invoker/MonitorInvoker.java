@@ -5,6 +5,7 @@ import infrastructure.serverrequesthandler.ServerRequestHandler;
 import java.awt.image.ReplicateScaleFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 import aplication.Medicao;
 import distribution.Message;
@@ -15,6 +16,8 @@ import distribution.ReplyHeader;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
 import distribution.marshaller.Marshaller;
+import infrastructure.qosobserver;
+
 
 public class MonitorInvoker extends AbstractInvoker {
 
@@ -33,6 +36,7 @@ public class MonitorInvoker extends AbstractInvoker {
 		Marshaller marshaller = new Marshaller();
 		Termination ter = new Termination();
 		Medicao remoteObj = new Medicao();
+		Calendar hora_inicial = new Calendar();
 
 		while (true) {
 			msgToBeUnmarshaled = serverRequestHandler.receive();
@@ -43,7 +47,9 @@ public class MonitorInvoker extends AbstractInvoker {
 			String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
 			Method method = remoteObj.getClass().getMethod(operation, null);
 
-			
+			//inicia a contagem do tempo do qos observer
+			hora_inicial = qosobserver.tempo1();
+
 			try{
 				Object res = method.invoke(remoteObj, null);	
 				ReplyBody replyBody = new ReplyBody();

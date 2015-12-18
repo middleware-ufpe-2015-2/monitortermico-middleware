@@ -13,7 +13,7 @@ import java.util.Date;
 public abstract class QosObserver implements IQosObserver {
 
 	@Override
-	public Date tempo1() throws IOException, InterruptedException, IOException {
+	public Calendar tempo1() throws IOException, InterruptedException, IOException {
 		 
 		SimpleDateFormat sdf = new SimpleDateFormat("HHmmssSSS");
 		//Pega o tempo 1, salva no arquivo e retorna para o Invoker
@@ -32,7 +32,7 @@ public abstract class QosObserver implements IQosObserver {
 
 	@Override
 	//Recebe o tempo 1 para comparar com o 2 e resultar em um tempo total
-	public void tempo2(Date date) throws IOException, InterruptedException, IOException{
+	public void tempo2(Calendar date) throws IOException, InterruptedException, IOException{
 		SimpleDateFormat returnDateSF = new SimpleDateFormat("HHmmssSSS");  
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HHmmssSSS");
 		
