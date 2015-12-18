@@ -1,6 +1,7 @@
 package distribution.invoker;
 
 import infrastructure.qosobserver.IQosObserver;
+import infrastructure.qosobserver.QosObserver;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ import distribution.ReplyBody;
 import distribution.ReplyHeader;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
+import distribution.invoker.AbstractInvoker;
 import distribution.marshaller.Marshaller;
 import distribution.pooling.MedicaoPool;
 import distribution.pooling.exception.TamanhoPoolException;

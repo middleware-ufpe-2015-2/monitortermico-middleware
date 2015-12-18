@@ -8,6 +8,10 @@ public class ReplyBody implements Serializable {
 	
 	private Object operationResult;
 
+	public ReplyBody(){
+		
+	}
+	
 	public ReplyBody(Object result) {
 		this.operationResult = result;
 	}
