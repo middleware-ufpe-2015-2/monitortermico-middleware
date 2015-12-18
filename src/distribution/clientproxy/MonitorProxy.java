@@ -5,6 +5,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utilsconf.UtilsConf;
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
@@ -26,7 +27,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public Medicao getMedicao(TipoGrandeza tipo) {
+	public Medicao getMedicao(TipoGrandeza tipo) throws Throwable {
 		
 		//preparando as variáveis
 		Invocation inv = new Invocation();
@@ -48,10 +49,27 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
 		
-		
+		Medicao medicao = null;
+		boolean lancaExcecao = false;
+		String msgErro = "";
 		try {
 			//chamando o requestor
 			ter = requestor.invoke(inv);
+			
+			// @ Result sent back to Client
+			if (ter.getCodeResult() == UtilsConf.COD_SUCESSO) {
+				medicao = (Medicao) ter.getResult();
+			} else {
+				lancaExcecao = true;
+				
+				switch (ter.getCodeResult()) {
+				case UtilsConf.COD_ERRO_POOL:
+					msgErro = UtilsConf.MSG_ERRO_POOL;
+					break;
+				default:
+					break;
+				}
+			}
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,9 +80,13 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		if (ter == null || lancaExcecao) {
+			throw new Exception(msgErro);
+		}
 				
 		// TODO Auto-generated method stub
-		return  (Medicao) ter.getResult();
+		return  medicao;
 	}
 
 	@Override
@@ -89,7 +111,6 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
-		
 		
 		try {
 			ter = requestor.invoke(inv);
