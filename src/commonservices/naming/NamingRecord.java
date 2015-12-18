@@ -7,6 +7,16 @@ public class NamingRecord {
 	private String serviceName;
 	private ClientProxy clientProxy;
 	
+	public NamingRecord() {
+		super();
+	}
+
+	public NamingRecord(String serviceName, ClientProxy clientProxy) {
+		super();
+		this.serviceName = serviceName;
+		this.clientProxy = clientProxy;
+	}
+	
 	public String getServiceName() {
 		return serviceName;
 	}
