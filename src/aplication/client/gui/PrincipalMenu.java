@@ -41,14 +41,14 @@ public class PrincipalMenu {
 	 */
 	private void go() {
 
-		JFrame frmMonitorTermico = new JFrame("Monitor Térmico");
+		JFrame frmMonitorTermico = new JFrame("Monitor TÃ©rmico");
 
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu menuOpcoes = new JMenu("Opções");
+		JMenu menuOpcoes = new JMenu("OpÃ§Ãµes");
 
-		JMenuItem menuReaMed = new JMenuItem("Realizar Medições");
-		JMenuItem menuHistMed = new JMenuItem("Histórico de Medições");
+		JMenuItem menuReaMed = new JMenuItem("Realizar MediÃ§Ãµes");
+		JMenuItem menuHistMed = new JMenuItem("HistÃ³rico de MediÃ§Ãµes");
 		JMenuItem menuSair = new JMenuItem("Sair");
 
 		menuSair.addActionListener(new MenuHandler());
@@ -85,14 +85,14 @@ public class PrincipalMenu {
 				JOptionPane
 						.showMessageDialog(
 								null,
-								"Sistema Monitor Térmico:"
-										+ "\nO Monitor Térmico é um sistema de controle"
-										+ "\ne gestão onde os usuários podem realizar e"
-										+ "\nvisualizar as medições do equipamento."
+								"Sistema Monitor TÃ©rmico:"
+										+ "\nO Monitor TÃ©rmico Ã© um sistema de controle"
+										+ "\ne gestÃ£o onde os usuÃ¡rios podem realizar e"
+										+ "\nvisualizar as mediÃ§Ãµes do equipamento."
 										+ "\n"
 										+ "\nDesenvolvimento:"
-										+ "\nTurma de SI-Tópicos5",
-								"Informações", JOptionPane.INFORMATION_MESSAGE);
+										+ "\nTurma de SI-TÃ³picos5",
+								"InformaÃ§Ãµes", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 				
@@ -106,7 +106,7 @@ public class PrincipalMenu {
 		frmMonitorTermico.setVisible(true);
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("termometroSol2.png"));
-		JLabel label = new JLabel("Monitor Térmico", icon, SwingConstants.CENTER);
+		JLabel label = new JLabel("Monitor TÃ©rmico", icon, SwingConstants.CENTER);
 		label.setFont(new Font("Courier", Font.BOLD, 28));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);

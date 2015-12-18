@@ -46,7 +46,7 @@ public class RealizaMed {
 		frmMonitorTermico = new JFrame();
 		frmMonitorTermico.setTitle("Monitor T\u00E9rmico");
 		frmMonitorTermico.setBounds(100, 100, 515, 343);
-		frmMonitorTermico.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMonitorTermico.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmMonitorTermico.getContentPane().setLayout(null);
 		
 		//add table model
@@ -56,7 +56,7 @@ public class RealizaMed {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//testando se está inserindo na view, código normal comentado abaixo
+				//testando se estï¿½ inserindo na view, cï¿½digo normal comentado abaixo
 				 Medicao m = new Medicao();
 				 m.setValue((float) (Math.random() * 100));
 				 System.out.println("Temp: " + m.getValue());
@@ -98,7 +98,7 @@ public class RealizaMed {
 		frmMonitorTermico.getContentPane().add(btnNewButton);
 		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Medições Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Mediï¿½ï¿½es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmMonitorTermico.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout());
