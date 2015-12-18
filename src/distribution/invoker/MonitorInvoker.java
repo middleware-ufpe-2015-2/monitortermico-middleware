@@ -72,6 +72,7 @@ public class MonitorInvoker extends AbstractInvoker {
 
 				// sending response
 				serverRequestHandler.send(marshalledMsg);
+				qosobserver.tempo2(hora_inicial);
 
 			}catch(Exception e){
 				ReplyBody replyBody = new ReplyBody();
