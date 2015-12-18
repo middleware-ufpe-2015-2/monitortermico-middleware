@@ -53,6 +53,7 @@ public class Requestor implements IRequestor {
 		msgUnMarshalled = marshaller.unmarshall(msgToBeUnMarshalled);
 		
 		//return result to Client Proxy
+		termination.setCodeResult(msgUnMarshalled.getHeader().getMessageType());
 		termination.setResult(msgUnMarshalled.getBody().getReplyBody().getOperationResult());
 		
 		return termination;
