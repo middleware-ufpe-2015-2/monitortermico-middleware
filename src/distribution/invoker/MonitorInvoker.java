@@ -87,13 +87,13 @@ public class MonitorInvoker extends AbstractInvoker {
 					
 					if(operation.contains("set")){
 						_add_msgToBeMarshalled = new Message(new MessageHeader(
-							"protocolo", 0, false, 0, 0), new MessageBody(null, null,
+							"protocolo", 0, false, UtilsConf.COD_SUCESSO, 0), new MessageBody(null, null,
 							new ReplyHeader("", 0, 0), new ReplyBody(
 									"Set Succeeded")));
 					}else{
 						ter.setResult(res);
 						_add_msgToBeMarshalled = new Message(new MessageHeader(
-							"protocolo", 0, false, 0, 0), new MessageBody(null, null,
+							"protocolo", 0, false, UtilsConf.COD_SUCESSO, 0), new MessageBody(null, null,
 							new ReplyHeader("", 0, 0), new ReplyBody(
 									ter.getResult())));
 					}
