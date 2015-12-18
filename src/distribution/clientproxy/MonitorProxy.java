@@ -15,7 +15,7 @@ import distribution.requestor.Requestor;
 public class MonitorProxy extends ClientProxy implements IMonitor {
 
 	private static final long serialVersionUID = -5924054021194325894L;
-	
+
 	public MonitorProxy(String h, int p) {
 		this.host = h;
 		this.port = p;
@@ -27,7 +27,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 
 	@Override
 	public Medicao getMedicao(TipoGrandeza tipo) {
-		
+
 		//preparando as variáveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
@@ -37,18 +37,18 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		;
 		String methodName;
 		Requestor requestor = new Requestor();
-		
+
 		// Preenche variáveis temporárias
 		methodName = Local.class.getEnclosingMethod().getName();
 		parameters.add(tipo);
-				
+
 		// preenche os parâmetros da chamada
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
-		
-		
+
+
 		try {
 			//chamando o requestor
 			ter = requestor.invoke(inv);
@@ -62,14 +62,14 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+
 		// TODO Auto-generated method stub
 		return  (Medicao) ter.getResult();
 	}
 
 	@Override
 	public void setmedicao(Medicao m) {
-		
+
 		//preparando as variáveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
@@ -79,18 +79,18 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		;
 		String methodName;
 		Requestor requestor = new Requestor();
-		
+
 		// information received from Client
 		methodName = Local.class.getEnclosingMethod().getName();
 		parameters.add(m);
-				
+
 		// information sent to Requestor
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
-		
-		
+
+
 		try {
 			ter = requestor.invoke(inv);
 		} catch (UnknownHostException e) {
@@ -103,21 +103,90 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public Medicao getMedicaoAnterior() {
+
+		//preparando as variáveis
+		Invocation inv = new Invocation();
+		Termination ter = new Termination();
+		ArrayList<Object> parameters = new ArrayList<Object>();
+		class Local {
+		}
+		;
+		String methodName;
+		Requestor requestor = new Requestor();
+
+		// Preenche variáveis temporárias
+		methodName = Local.class.getEnclosingMethod().getName();
+
+		// preenche os parâmetros da chamada
+		inv.getClientProxy().setHost(this.getHost());
+		inv.getClientProxy().setPort(this.port);
+		inv.setOperationName(methodName);
+
+
+		try {
+			//chamando o requestor
+			ter = requestor.invoke(inv);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		// TODO Auto-generated method stub
-		return null;
+		return  (Medicao) ter.getResult();
 	}
 
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() {
+
+		//preparando as variáveis
+		Invocation inv = new Invocation();
+		Termination ter = new Termination();
+		ArrayList<Object> parameters = new ArrayList<Object>();
+		class Local {
+		}
+		;
+		String methodName;
+		Requestor requestor = new Requestor();
+
+		// Preenche variáveis temporárias
+		methodName = Local.class.getEnclosingMethod().getName();
+
+		// preenche os parâmetros da chamada
+		inv.getClientProxy().setHost(this.getHost());
+		inv.getClientProxy().setPort(this.port);
+		inv.setOperationName(methodName);
+
+
+		try {
+			//chamando o requestor
+			ter = requestor.invoke(inv);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		// TODO Auto-generated method stub
-		return null;
+		return  (List<Medicao>) ter.getResult();
+
 	}
 
 }

@@ -2,6 +2,7 @@ package distribution.invoker;
 
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
+import java.awt.image.ReplicateScaleFilter;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -48,37 +49,37 @@ public class MonitorInvoker extends AbstractInvoker {
 
 			//inicia a contagem do tempo do qos observer
 			hora_inicial = qosobserver.tempo1();
-			//Verificar com Nelson se o uso do Reflection ta correto;
+
 			try{
-				Object res = method.invoke(remoteObj, null);			
-				
+				Object res = method.invoke(remoteObj, null);	
+				ReplyBody replyBody = new ReplyBody();
 				if(operation.contains("set")){
+					
+					replyBody.setOperationResult("Set Suceeded");
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								"Set Succeeded")));
+						new ReplyHeader("", 0, 0), replyBody));
 				}else{
 					ter.setResult(res);
+					replyBody.setOperationResult(ter.getResult());
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 0, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								ter.getResult())));
+						new ReplyHeader("", 0, 0), replyBody));
 				}
-				
-				//chama o tempo final
-				qosobserver.tempo2(hora_inicial);
-				
+
 				// Marshalling the response
 				marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
 
 				// sending response
 				serverRequestHandler.send(marshalledMsg);
+				qosobserver.tempo2(hora_inicial);
 
 			}catch(Exception e){
+				ReplyBody replyBody = new ReplyBody();
+				replyBody.setOperationResult(e.getMessage());
 				_add_msgToBeMarshalled = new Message(new MessageHeader(
 						"protocolo", 0, false, 1, 0), new MessageBody(null, null,
-						new ReplyHeader("", 0, 0), new ReplyBody(
-								e.getMessage())));
+						new ReplyHeader("", 0, 0), replyBody));
 			}
 		}
 
