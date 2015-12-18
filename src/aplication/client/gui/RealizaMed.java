@@ -67,7 +67,7 @@ public class RealizaMed {
 //				 tableModel.inserir(m);
 				 
 				try{
-					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
+					NamingProxy namingProxy = new NamingProxy("localhost", 1313);
 					
 					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
 					

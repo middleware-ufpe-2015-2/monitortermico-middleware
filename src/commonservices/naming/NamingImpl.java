@@ -15,7 +15,7 @@ public class NamingImpl implements INaming {
 	}
 
 	public void bind(String serviceName, ClientProxy clientProxy) {
-		NamingRecord namingRecord = new NamingRecord(serviceName, clientProxy);
+		NamingRecord namingRecord = new NamingRecord(serviceName, 2020, clientProxy);
 
 		this.namingRepository.add(namingRecord);
 
@@ -27,7 +27,7 @@ public class NamingImpl implements INaming {
 
 		for (NamingRecord r : this.namingRepository) {
 			if (r.getServiceName().contains(serviceName)) {
-				clientProxy = r.getClientProxy();
+				clientProxy = r.getObj();
 				break;
 			}
 		}

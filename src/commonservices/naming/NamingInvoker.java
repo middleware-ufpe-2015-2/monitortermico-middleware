@@ -11,15 +11,12 @@ import distribution.ReplyBody;
 import distribution.ReplyHeader;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
-import distribution.invoker.AbstractInvoker;
 import distribution.marshaller.Marshaller;
 
+public class NamingInvoker {
 
-public class NamingInvoker extends AbstractInvoker {
-
-	@Override
-	public void invoke(ClientProxy clientProxy) throws IOException, Throwable {
-		ServerRequestHandler srh = new ServerRequestHandler(clientProxy.getPort());
+	public void invoke(int portNamingServer) throws IOException, Throwable {
+		ServerRequestHandler srh = new ServerRequestHandler(portNamingServer);
 		byte [] msgToBeUnmarshalled;
 		byte [] msgMarshalled;
 		Message msgUnmarshalled = new Message();
@@ -99,6 +96,5 @@ public class NamingInvoker extends AbstractInvoker {
 				break;
 			}
 		}
-
-	}	
+	}
 }

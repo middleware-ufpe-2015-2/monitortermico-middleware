@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import infrastructure.Plugin;
-
 public class PluginTCP extends Plugin {
 
 	private boolean isServer;

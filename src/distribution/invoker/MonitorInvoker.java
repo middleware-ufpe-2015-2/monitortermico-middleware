@@ -36,6 +36,7 @@ public class MonitorInvoker extends AbstractInvoker {
 
 		byte[] msgToBeUnmarshaled = null;
 		byte[] marshalledMsg = null;
+		this.serverRequestHandler = new ServerRequestHandler(clientProxy.getPort());
 
 		Message unmarshaledMsg = new Message();
 		Marshaller marshaller = new Marshaller();

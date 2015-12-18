@@ -1,7 +1,6 @@
 package commonservices.naming;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
@@ -10,10 +9,13 @@ import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
 import distribution.requestor.Requestor;
 
-public class NamingProxy extends ClientProxy implements Serializable, INaming {
-
-	private static final long serialVersionUID = -8846996576561055585L;
+public class NamingProxy extends ClientProxy implements INaming {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NamingProxy(String h, int p){
 		this.host = h;
 		this.port = p;	
@@ -40,6 +42,9 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		inv.setParameters(parameters);
 
 		requestor.invoke(inv);
+
+		// @ Result sent back to Client
+		return;
 	}
 
 	public ClientProxy lookup(String serviceName) throws UnknownHostException, IOException, Throwable {
@@ -96,5 +101,4 @@ public class NamingProxy extends ClientProxy implements Serializable, INaming {
 		
 		return result;
 	}
-
 }
