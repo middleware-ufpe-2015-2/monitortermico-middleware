@@ -1,5 +1,7 @@
 package commonservices.naming;
 
+import java.io.IOException;
+
 import distribution.Message;
 import distribution.Termination;
 import distribution.marshaller.Marshaller;
@@ -47,8 +49,8 @@ public class NamingInvoker {
 	 */
 	Termination terNamiInv = new Termination();
 	
-	
-	while (true){
+	public void invoke(int portNamingServer) throws IOException, Throwable {
+		while (true){
 		
 		/**
 		 * Recebendo do ServerRequestHandler. Ficará comentado até a resolução do 
@@ -184,8 +186,6 @@ public class NamingInvoker {
 				
 		//}
 		
-		
+		}
 	}
-	
-	
 }

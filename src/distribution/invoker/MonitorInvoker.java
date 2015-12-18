@@ -1,12 +1,12 @@
 package distribution.invoker;
 
 import infrastructure.qosobserver.IQosObserver;
-import infrastructure.qosobserver.QosObserver;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import utilsconf.UtilsConf;
 import aplication.Medicao;
@@ -17,7 +17,6 @@ import distribution.ReplyBody;
 import distribution.ReplyHeader;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
-import distribution.invoker.AbstractInvoker;
 import distribution.marshaller.Marshaller;
 import distribution.pooling.MedicaoPool;
 import distribution.pooling.exception.TamanhoPoolException;
@@ -41,8 +40,8 @@ public class MonitorInvoker extends AbstractInvoker {
 		Message unmarshaledMsg = new Message();
 		Marshaller marshaller = new Marshaller();
 		Termination ter = new Termination();
-		Calendar hora_inicial = new Calendar();
-		IQosObserver qosobserver;
+		Calendar hora_inicial = new GregorianCalendar();
+		IQosObserver qosobserver = null;
 
 		while (true) {
 			msgToBeUnmarshaled = serverRequestHandler.receive();
@@ -110,13 +109,15 @@ public class MonitorInvoker extends AbstractInvoker {
 	
 					// sending response
 					serverRequestHandler.send(marshalledMsg);
+					medicaoPool.retornarObjeto(remoteObj);
 					qosobserver.tempo2(hora_inicial);
-	
+					
 				}catch(Exception e){
 					_add_msgToBeMarshalled = new Message(new MessageHeader(
 							"protocolo", 0, false, 1, 0), new MessageBody(null, null,
 							new ReplyHeader("", 0, 0), new ReplyBody(
 									e.getMessage())));
+					medicaoPool.retornarObjeto(remoteObj);
 				}
 			}
 		}
