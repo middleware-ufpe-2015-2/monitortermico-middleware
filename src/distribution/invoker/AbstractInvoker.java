@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import distribution.clientproxy.ClientProxy;
 
-public class AbstractInvoker implements IInvoker {
+abstract class AbstractInvoker implements IInvoker {
 
 	@Override
 	public void invoke(ClientProxy clientProxy) throws IOException, Throwable {
