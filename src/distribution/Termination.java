@@ -6,7 +6,7 @@ public class Termination implements Serializable {
 	
 	private static final long serialVersionUID = 7450457498729281381L;
 	
-	private int codeResult;
+	private Integer codeResult;
 	private Object result;
 
 	public Object getResult() {
@@ -17,11 +17,11 @@ public class Termination implements Serializable {
 		this.result = result;
 	}
 
-	public int getCodeResult() {
+	public Integer getCodeResult() {
 		return codeResult;
 	}
 
-	public void setCodeResult(int codeResult) {
+	public void setCodeResult(Integer codeResult) {
 		this.codeResult = codeResult;
 	}
 

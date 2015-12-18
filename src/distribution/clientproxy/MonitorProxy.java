@@ -49,22 +49,17 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setParameters(parameters);
 
 
-		try {
-			//chamando o requestor
-			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		ter = requestor.invoke(inv);
+		TableExcpetions table = new TableExcpetions();
+		Medicao result = (Medicao) ter.getResult();
+		
+		if(ter.getCodeResult() != null){
+			
+			result.setErro(table.buscarError(ter.getCodeResult()) );
+						
 		}
-
-		// TODO Auto-generated method stub
-		return  (Medicao) ter.getResult();
+		
+		return result;
 	}
 
 	@Override
@@ -91,20 +86,8 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setParameters(parameters);
 
 
-		try {
-			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ter = requestor.invoke(inv);
 
-		// TODO Auto-generated method stub
 
 	}
 
@@ -130,22 +113,19 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setOperationName(methodName);
 
 
-		try {
-			//chamando o requestor
-			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ter = requestor.invoke(inv);
 
-		// TODO Auto-generated method stub
-		return  (Medicao) ter.getResult();
+		TableExcpetions table = new TableExcpetions();
+		Medicao result = (Medicao) ter.getResult();
+		
+		if(ter.getCodeResult() != null){
+			
+			result.setErro(table.buscarError(ter.getCodeResult()) );
+						
+		}
+		
+
+		return result;
 	}
 
 	@Override
@@ -170,19 +150,8 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setOperationName(methodName);
 
 
-		try {
-			//chamando o requestor
+
 			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		// TODO Auto-generated method stub
 		return  (List<Medicao>) ter.getResult();
