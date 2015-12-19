@@ -11,9 +11,12 @@ public class MessageBody implements Serializable {
 	private ReplyHeader replyHeader;
 	private ReplyBody replyBody;
 
-	public MessageBody(Object object, Object object2, ReplyHeader replyHeader2,
-			ReplyBody replyBody2) {
-		// TODO Auto-generated constructor stub
+	public MessageBody(RequestHeader reqHeader, RequestBody reqBody, ReplyHeader replyHeader,
+			ReplyBody replyBody) {
+		this.requestHeader = reqHeader;
+		this.requestBody =  reqBody;
+		this.replyHeader = replyHeader;
+		this.replyBody = replyBody;
 	}
 	public RequestHeader getRequestHeader() {
 		return requestHeader;

@@ -1,11 +1,9 @@
 package aplication.client.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
@@ -56,42 +54,40 @@ public class RealizaMed {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//testando se est� inserindo na view, c�digo normal comentado abaixo
-				 Medicao m = new Medicao();
-				 m.setValue((float) (Math.random() * 100));
-				 System.out.println("Temp: " + m.getValue());
+				//insercao centralizada 
+//				Medicao m = new Medicao();
+//				 m.setValue((float) (Math.random() * 100));
+//				 System.out.println("Temp: " + m.getValue());
+//				 
+//				 m.setGrandeza("30G");
+//				 System.out.println("Grand: " + m.getGrandeza());
+//				 m.setUnidade("Celsius");
+//				 System.out.println("Uni: " + m.getUnidade());
+//				 
+//				 tableModel.inserir(m);
 				 
-				 m.setGrandeza("30G");
-				 System.out.println("Grand: " + m.getGrandeza());
-				 m.setUnidade("Celsius");
-				 System.out.println("Uni: " + m.getUnidade());
-				 
-				 tableModel.inserir(m);
-				 
-//				try{
-//					NamingProxy namingProxy = new NamingProxy("localhost", 2001);
-//					
-//					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
-//					
-//					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
-//					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
-//					
-//					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
-//					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
-//					
-//					tableModel.inserir(m1);
-//					tableModel.inserir(m2);
-//				} catch (RemoteException re){
-//					System.out.println(re.getMessage());
-//				} catch (NotBoundException nbe) {
-//					System.out.println(nbe.getMessage());
-//				} catch (UnknownHostException e1) {
-//					e1.printStackTrace();
-//				} catch (IOException e1) {
-//					e1.printStackTrace();
-//				} catch (Throwable e1) {
-//					e1.printStackTrace();
-//				}
+				try{
+					NamingProxy namingProxy = new NamingProxy("localhost", 1313);
+					
+					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
+					
+					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
+					
+					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
+					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
+					
+					tableModel.inserir(m1);
+					tableModel.inserir(m2);
+				} catch (RemoteException re){
+					System.out.println(re.getMessage());
+				} catch (NotBoundException nbe) {
+					System.out.println(nbe.getMessage());
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (Throwable e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(10, 11, 200, 23);

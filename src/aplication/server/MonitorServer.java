@@ -18,16 +18,19 @@ public class MonitorServer implements Serializable {
 		
 		//remote object
 		MonitorProxy monitorProxy = new MonitorProxy();
+		monitorProxy.setHost("localhost");
+		monitorProxy.setPort(2001);
 		
 		//obtain instance of Naming Service
-		NamingProxy namingService = new NamingProxy("localhost", 2001);
+		NamingProxy namingService = new NamingProxy("localhost", 1313);
 		
 		//register monitor in Naming service
 		namingService.bind("Monitor", monitorProxy);
 		
-		monitorInvoker.invoke(monitorProxy);
-		
 		System.out.println("Monitor server ready...");
+		
+		monitorInvoker.invoke(monitorProxy);
+	
 	}
 
 }

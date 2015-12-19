@@ -24,8 +24,7 @@ public class QosObserver implements IQosObserver {
 		Calendar date = Calendar.getInstance();
 		//Salvar o "hora" no arquivo
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter("../qos_timetable.txt",true));
-		Date linha = hora;
-		buffWrite.append(linha + "\n");
+		buffWrite.append(hr + "\n");
 		buffWrite.close();
 		
 		return date;

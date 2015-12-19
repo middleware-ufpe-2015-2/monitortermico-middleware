@@ -1,8 +1,9 @@
 package infrastructure.serverrequesthandler;
 
-import java.io.IOException;
 import infrastructure.plugins.Plugin;
 import infrastructure.plugins.ProtocolType;
+
+import java.io.IOException;
 
 public class ServerRequestHandler {
 	private int port;
@@ -17,7 +18,6 @@ public class ServerRequestHandler {
 	}
 
 	public byte [] receive() throws IOException, Throwable {
-
 		byte [] rcvMsg = null;
 		rcvMsg=plug.receive();				
 		return rcvMsg;

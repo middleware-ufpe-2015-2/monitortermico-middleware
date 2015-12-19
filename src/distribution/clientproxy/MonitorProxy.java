@@ -1,7 +1,5 @@
 package distribution.clientproxy;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +26,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public Medicao getMedicao(TipoGrandeza tipo) {
 
-		//preparando as variáveis
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -38,11 +36,12 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 		parameters.add(tipo);
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
+		inv.setClientProxy(new ClientProxy());
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
@@ -65,7 +64,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public void setmedicao(Medicao m) {
 
-		//preparando as variáveis
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -94,7 +93,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public Medicao getMedicaoAnterior() {
 
-		//preparando as variáveis
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -104,10 +103,10 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
@@ -131,7 +130,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() {
 
-		//preparando as variáveis
+		// preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -141,10 +140,11 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
+		inv.setClientProxy(new ClientProxy());
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);

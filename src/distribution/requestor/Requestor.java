@@ -72,6 +72,7 @@ public class Requestor implements IRequestor {
 		}
 					
 		//return result to Client Proxy
+		termination.setCodeResult(msgUnMarshalled.getHeader().getMessageType());
 		termination.setResult(msgUnMarshalled.getBody().getReplyBody().getOperationResult());
 		
 		return termination;
