@@ -1,6 +1,7 @@
 package distribution.invoker;
 
 import infrastructure.qosobserver.IQosObserver;
+import infrastructure.qosobserver.QosObserver;
 import infrastructure.serverrequesthandler.ServerRequestHandler;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import utilsconf.UtilsConf;
-import aplication.Medicao;
+import aplication.server.MonitorImpl;
 import distribution.Message;
 import distribution.MessageBody;
 import distribution.MessageHeader;
@@ -42,14 +43,14 @@ public class MonitorInvoker extends AbstractInvoker {
 		Marshaller marshaller = new Marshaller();
 		Termination ter = new Termination();
 		Calendar hora_inicial = new GregorianCalendar();
-		IQosObserver qosobserver = null;
+		IQosObserver qosobserver = new QosObserver();
 
 		while (true) {
 			msgToBeUnmarshaled = serverRequestHandler.receive();
 
 			unmarshaledMsg = marshaller.unmarshall(msgToBeUnmarshaled);
 			
-			Medicao remoteObj = null;
+			MonitorImpl remoteObj = null;
 			boolean encontrou = false;
 			int qtdTentativas = 0;
 			long tempoTentativa = 2000L;
@@ -85,12 +86,16 @@ public class MonitorInvoker extends AbstractInvoker {
 			
 				Message _add_msgToBeMarshalled;
 				String operation = unmarshaledMsg.getBody().getRequestHeader().getOperation();
-				Method method = remoteObj.getClass().getMethod(operation, null);
+				Class<?>[] parameterTypes = new Class<?>[unmarshaledMsg.getBody().getRequestBody().getParameters().size()];
+				for(int x = 0; x < parameterTypes.length; x++){
+					parameterTypes[x] = unmarshaledMsg.getBody().getRequestBody().getParameters().get(x).getClass();
+				}
+				Method method = remoteObj.getClass().getMethod(operation, parameterTypes);
 	
 				hora_inicial = qosobserver.tempo1();
 				//Verificar com Nelson se o uso do Reflection ta correto;
 				try{
-					Object res = method.invoke(remoteObj, null);			
+					Object res = method.invoke(remoteObj);			
 					
 					if(operation.contains("set")){
 						_add_msgToBeMarshalled = new Message(new MessageHeader(

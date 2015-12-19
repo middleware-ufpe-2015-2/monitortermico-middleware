@@ -7,6 +7,7 @@ import java.util.List;
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
+import aplication.exceptions.InsufficientMedicoesException;
 
 public class MonitorImpl implements IMonitor, Remote {
 	
@@ -39,11 +40,11 @@ public class MonitorImpl implements IMonitor, Remote {
 	}
 
 	@Override
-	public List<Medicao> getCincoUltimasMedicoes() {
+	public List<Medicao> getCincoUltimasMedicoes() throws InsufficientMedicoesException {
 		if(medicoes.size() > 5){
 			return medicoes.subList(medicoes.size()-1, medicoes.size()-5);
 		} else {
-			return medicoes;
+			throw new InsufficientMedicoesException(medicoes.size());
 		}
 	}
 

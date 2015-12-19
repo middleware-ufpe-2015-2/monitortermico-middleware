@@ -8,7 +8,7 @@ public class Medicao {
 	private float value;
 	private String grandeza;
 	private String unidade;
-	ErroMiddleware erro;
+	private ErroMiddleware erro;
 	
 	public ErroMiddleware getErro() {
 		return erro;
