@@ -1,18 +1,18 @@
 package distribution.pooling;
 
-import aplication.Medicao;
+import aplication.server.MonitorImpl;
 
 
-public class MedicaoPool extends ObjectPool<Medicao> {
+public class MedicaoPool extends ObjectPool<MonitorImpl> {
 
-	Medicao medicao;
+	MonitorImpl medicaoImpl;
 
 	public MedicaoPool(int tamanho) {
 		super(tamanho);
 	}
 
 	@Override
-	public Medicao criarObjeto() {
-		return medicao = new Medicao(); 
+	public MonitorImpl criarObjeto() {
+		return medicaoImpl = new MonitorImpl(); 
 	}
 }

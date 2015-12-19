@@ -26,7 +26,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	@Override
 	public Medicao getMedicao(TipoGrandeza tipo) {
 
-		//preparando as variaveis
+		// preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -47,24 +47,23 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
 
-
 		ter = requestor.invoke(inv);
 		TableExcpetions table = new TableExcpetions();
 		Medicao result = (Medicao) ter.getResult();
-		
-		if(ter.getCodeResult() != null){
-			
-			result.setErro(table.buscarError(ter.getCodeResult()) );
-						
+
+		if (ter.getCodeResult() != null) {
+
+			result.setErro(table.buscarError(ter.getCodeResult()));
+
 		}
-		
+
 		return result;
 	}
 
 	@Override
 	public void setmedicao(Medicao m) {
 
-		//preparando as variaveis
+		// preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -84,16 +83,13 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
 
-
 		ter = requestor.invoke(inv);
-
-
 	}
 
 	@Override
 	public Medicao getMedicaoAnterior() {
 
-		//preparando as variaveis
+		// preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -111,22 +107,19 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 
-
 		ter = requestor.invoke(inv);
 
 		TableExcpetions table = new TableExcpetions();
 		Medicao result = (Medicao) ter.getResult();
-		
-		if(ter.getCodeResult() != null){
-			
-			result.setErro(table.buscarError(ter.getCodeResult()) );
-						
+
+		if (ter.getCodeResult() != null) {
+			result.setErro(table.buscarError(ter.getCodeResult()));
 		}
-		
 
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() {
 
@@ -149,13 +142,10 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 
-
-
-			ter = requestor.invoke(inv);
+		ter = requestor.invoke(inv);
 
 		// TODO Auto-generated method stub
-		return  (List<Medicao>) ter.getResult();
-
+		return ((List<Medicao>) ter.getResult());
 	}
 
 }
