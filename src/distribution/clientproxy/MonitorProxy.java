@@ -1,11 +1,8 @@
 package distribution.clientproxy;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import utilsconf.UtilsConf;
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
@@ -27,9 +24,9 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public Medicao getMedicao(TipoGrandeza tipo) throws Throwable {
-		
-		//preparando as variáveis
+	public Medicao getMedicao(TipoGrandeza tipo) {
+
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -39,61 +36,35 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 		parameters.add(tipo);
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
 		inv.setClientProxy(new ClientProxy());
-		inv.getClientProxy().setHost(this.host);
+		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
+
+
+		ter = requestor.invoke(inv);
+		TableExcpetions table = new TableExcpetions();
+		Medicao result = (Medicao) ter.getResult();
 		
-		Medicao medicao = null;
-		boolean lancaExcecao = false;
-		String msgErro = "";
-		try {
-			//chamando o requestor
-			ter = requestor.invoke(inv);
+		if(ter.getCodeResult() != null){
 			
-			// @ Result sent back to Client
-			if (ter.getCodeResult() == UtilsConf.COD_SUCESSO) {
-				medicao = (Medicao) ter.getResult();
-			} else {
-				lancaExcecao = true;
-				
-				switch (ter.getCodeResult()) {
-				case UtilsConf.COD_ERRO_POOL:
-					msgErro = UtilsConf.MSG_ERRO_POOL;
-					break;
-				default:
-					break;
-				}
-			}
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			result.setErro(table.buscarError(ter.getCodeResult()) );
+						
 		}
 		
-		if (ter == null || lancaExcecao) {
-			throw new Exception(msgErro);
-		}
-				
-		// TODO Auto-generated method stub
-		return  medicao;
+		return result;
 	}
 
 	@Override
 	public void setmedicao(Medicao m) {
 
-		//preparando as variáveis
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -112,28 +83,17 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 		inv.setParameters(parameters);
-		
-		try {
-			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		// TODO Auto-generated method stub
+
+		ter = requestor.invoke(inv);
+
 
 	}
 
 	@Override
 	public Medicao getMedicaoAnterior() {
 
-		//preparando as variáveis
+		//preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -143,37 +103,34 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 
 
-		try {
-			//chamando o requestor
-			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ter = requestor.invoke(inv);
 
-		// TODO Auto-generated method stub
-		return  (Medicao) ter.getResult();
+		TableExcpetions table = new TableExcpetions();
+		Medicao result = (Medicao) ter.getResult();
+		
+		if(ter.getCodeResult() != null){
+			
+			result.setErro(table.buscarError(ter.getCodeResult()) );
+						
+		}
+		
+
+		return result;
 	}
 
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() {
 
-		//preparando as variáveis
+		// preparando as variaveis
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -183,28 +140,18 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		String methodName;
 		Requestor requestor = new Requestor();
 
-		// Preenche variáveis temporárias
+		// Preenche variaveis temporarias
 		methodName = Local.class.getEnclosingMethod().getName();
 
-		// preenche os parâmetros da chamada
+		// preenche os parametros da chamada
+		inv.setClientProxy(new ClientProxy());
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
 
 
-		try {
-			//chamando o requestor
+
 			ter = requestor.invoke(inv);
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		// TODO Auto-generated method stub
 		return  (List<Medicao>) ter.getResult();

@@ -1,12 +1,21 @@
 package aplication;
 
+import distribution.clientproxy.ErroMiddleware;
+
 
 public class Medicao {
 	
 	private float value;
 	private String grandeza;
 	private String unidade;
+	ErroMiddleware erro;
 	
+	public ErroMiddleware getErro() {
+		return erro;
+	}
+	public void setErro(ErroMiddleware erro) {
+		this.erro = erro;
+	}
 	public float getValue() {
 		return value;
 	}
