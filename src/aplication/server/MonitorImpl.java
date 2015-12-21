@@ -44,7 +44,7 @@ public class MonitorImpl implements IMonitor, Remote {
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() throws InsufficientMedicoesException {
 		int lastPos = medicoes.size();
-		if(lastPos > 5){
+		if(lastPos >= 5){
 			return medicoes.subList(lastPos-1, lastPos-5);
 		} else {
 			throw new InsufficientMedicoesException(medicoes.size());

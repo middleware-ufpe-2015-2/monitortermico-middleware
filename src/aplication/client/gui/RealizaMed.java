@@ -58,15 +58,14 @@ public class RealizaMed {
 					NamingProxy namingProxy = new NamingProxy("localhost", 1313);
 					
 					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
+					Medicao m = null; 
+					if( (Math.random()*10) > 5){
+						m = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+					} else {
+						m = monitor.getMedicao(TipoGrandeza.UMIDADE);
+					}
 					
-					Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
-					System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
-					
-					Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
-					System.out.println("Umidade: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
-					
-					tableModel.inserir(m1);
-					tableModel.inserir(m2);
+					tableModel.inserir(m);
 				} catch (RemoteException re){
 					System.out.println(re.getMessage());
 				} catch (NotBoundException nbe) {

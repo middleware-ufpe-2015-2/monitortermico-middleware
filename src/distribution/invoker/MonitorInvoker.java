@@ -128,6 +128,12 @@ public class MonitorInvoker extends AbstractInvoker {
 							new ReplyHeader("", 0, 0), new ReplyBody(
 									e.getMessage())));
 					medicaoPool.retornarObjeto(remoteObj);
+
+					// Marshalling the response
+					marshalledMsg = marshaller.marshall(_add_msgToBeMarshalled);
+	
+					// sending response
+					serverRequestHandler.send(marshalledMsg);					
 				}
 			}
 		}
