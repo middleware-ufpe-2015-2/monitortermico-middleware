@@ -15,12 +15,15 @@ import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
+import aplication.exceptions.InsufficientMedicoesException;
 
 import javax.swing.JButton;
 
 import commonservices.naming.NamingProxy;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.List;
 
 public class HistoricoMed {
@@ -72,11 +75,20 @@ public class HistoricoMed {
 				try{
 					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");
 					List<Medicao> lista = monitor.getCincoUltimasMedicoes();
+					if(lista==null){
+						throw new InsufficientMedicoesException(0);
+					}
 					for(Medicao m: lista){
 						tableModel.inserir(m);
 					}
-				} catch(Throwable e){
-					JOptionPane.showMessageDialog(null, e.getMessage());
+				} catch(InsufficientMedicoesException e){
+					JOptionPane.showMessageDialog(frmHistoricoMed, "Quantidade de medi\u00E7\u00F5es insuficientes.");
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (Throwable e) {
+					e.printStackTrace();
 				}
 				
 			}
