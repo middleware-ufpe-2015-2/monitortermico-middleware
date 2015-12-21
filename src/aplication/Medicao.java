@@ -1,9 +1,13 @@
 package aplication;
 
+import java.io.Serializable;
+
 import distribution.clientproxy.ErroMiddleware;
 
 
-public class Medicao {
+public class Medicao implements Serializable {
+	
+	private static final long serialVersionUID = 1653576778172104059L;
 	
 	private float value;
 	private String grandeza;

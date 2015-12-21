@@ -4,14 +4,24 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.JTableHeader;
 
+import aplication.IMonitor;
 import aplication.Medicao;
+import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
+
+import javax.swing.JButton;
+
+import commonservices.naming.NamingProxy;
+
+import java.awt.event.ActionListener;
+import java.util.List;
 
 public class HistoricoMed {
 	private JFrame frmHistoricoMed;
@@ -31,7 +41,7 @@ public class HistoricoMed {
 	 */
 	public void initialize(){
 		frmHistoricoMed = new JFrame();
-		frmHistoricoMed.setTitle("Histórico de Medições");
+		frmHistoricoMed.setTitle("Hist\u00f3rico de Medi\u00E7\u00F5es");
 		frmHistoricoMed.setBounds(100, 100, 515, 343);
 		frmHistoricoMed.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmHistoricoMed.getContentPane().setLayout(null);
@@ -39,22 +49,8 @@ public class HistoricoMed {
 		//add table model
 		this.tableModel = new MedicaoTableModel();
 		
-		//teste para verificar se está inserindo na table e mostrando na view
-		for (int i = 0; i < 5; i++) {
-			Medicao m = new Medicao();
-			m.setValue((float) (Math.random() * 100));
-			System.out.println("Temp: " + m.getValue());
-			;
-			m.setGrandeza("30G");
-			System.out.println("Grand: " + m.getGrandeza());
-			m.setUnidade("Celsius");
-			System.out.println("Uni: " + m.getUnidade());
-
-			tableModel.inserir(m);
-		}
-		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Últimas Medições Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "\u00daltimas Medi\u00E7\u00F5es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmHistoricoMed.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout());
@@ -68,6 +64,25 @@ public class HistoricoMed {
 		
 		panel.add(header, BorderLayout.NORTH);
 		panel.add(table, BorderLayout.CENTER);
+		
+		JButton btnRecuperarMedicoes = new JButton("Recuperar Medi\u00E7\u00F5es");
+		btnRecuperarMedicoes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NamingProxy namingProxy = new NamingProxy("localhost", 1313);
+				try{
+					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");
+					List<Medicao> lista = monitor.getCincoUltimasMedicoes();
+					for(Medicao m: lista){
+						tableModel.inserir(m);
+					}
+				} catch(Throwable e){
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+				
+			}
+		});
+		btnRecuperarMedicoes.setBounds(131, 256, 129, 23);
+		frmHistoricoMed.getContentPane().add(btnRecuperarMedicoes);
 		
 		
 	}

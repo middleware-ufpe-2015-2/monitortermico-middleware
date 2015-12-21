@@ -141,6 +141,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
 		inv.setOperationName(methodName);
+		inv.setParameters(parameters);
 
 		ter = requestor.invoke(inv);
 

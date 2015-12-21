@@ -37,14 +37,14 @@ public class PrincipalMenu {
 	 */
 	private void go() {
 
-		JFrame frmMonitorTermico = new JFrame("Monitor Termico");
+		JFrame frmMonitorTermico = new JFrame("Monitor T\u00e9rmico");
 
 		JMenuBar menuBar = new JMenuBar();
 
-		JMenu menuOpcoes = new JMenu("Opcoes");
+		JMenu menuOpcoes = new JMenu("Op\u00E7\u00F5es");
 
-		JMenuItem menuReaMed = new JMenuItem("Realizar Medições");
-		JMenuItem menuHistMed = new JMenuItem("Historico de Medicoes");
+		JMenuItem menuReaMed = new JMenuItem("Realizar Medi\u00E7\u00F5es");
+		JMenuItem menuHistMed = new JMenuItem("Hist\u00f3rico de Medi\u00E7\u00F5es");
 		JMenuItem menuSair = new JMenuItem("Sair");
 
 		menuSair.addActionListener(new MenuHandler());
@@ -80,14 +80,14 @@ public class PrincipalMenu {
 				JOptionPane
 						.showMessageDialog(
 								null,
-								"Sistema Monitor Termico:"
-										+ "\nO Monitor Termico é um sistema de controle"
-										+ "\ne gestao onde os usuarios podem realizar e"
-										+ "\nvisualizar as medicoes do equipamento."
+								"Sistema Monitor T\u00e9rmico:"
+										+ "\nO Monitor T\u00e9rmico \u00e9 um sistema de controle"
+										+ "\ne gest\u00E3o onde os usu\u00e1rios podem realizar e"
+										+ "\nvisualizar as medi\u00E7\u00F5es do equipamento."
 										+ "\n"
 										+ "\nDesenvolvimento:"
-										+ "\nTurma de SI-Topicos5",
-								"Informacoes", JOptionPane.INFORMATION_MESSAGE);
+										+ "\nTurma de SI-T\u00f3picos5",
+								"Informa\u00E7\u00F5es", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 				
@@ -101,7 +101,7 @@ public class PrincipalMenu {
 		frmMonitorTermico.setVisible(true);
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("termometroSol2.png"));
-		JLabel label = new JLabel("Monitor Termico", icon, SwingConstants.CENTER);
+		JLabel label = new JLabel("Monitor T\u00e9rmico", icon, SwingConstants.CENTER);
 		label.setFont(new Font("Courier", Font.BOLD, 28));
 		label.setHorizontalTextPosition(SwingConstants.CENTER);
 		label.setVerticalTextPosition(SwingConstants.BOTTOM);

@@ -53,19 +53,7 @@ public class RealizaMed {
 		JButton btnNewButton = new JButton("Realizar Medi\u00E7\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//insercao centralizada 
-//				Medicao m = new Medicao();
-//				 m.setValue((float) (Math.random() * 100));
-//				 System.out.println("Temp: " + m.getValue());
-//				 
-//				 m.setGrandeza("30G");
-//				 System.out.println("Grand: " + m.getGrandeza());
-//				 m.setUnidade("Celsius");
-//				 System.out.println("Uni: " + m.getUnidade());
-//				 
-//				 tableModel.inserir(m);
-				 
+			 
 				try{
 					NamingProxy namingProxy = new NamingProxy("localhost", 1313);
 					
@@ -94,7 +82,7 @@ public class RealizaMed {
 		frmMonitorTermico.getContentPane().add(btnNewButton);
 		
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "Medi��es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null, "Medi\u00E7\u00F5es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmMonitorTermico.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout());

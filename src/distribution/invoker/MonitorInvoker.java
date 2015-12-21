@@ -93,9 +93,13 @@ public class MonitorInvoker extends AbstractInvoker {
 				Method method = remoteObj.getClass().getMethod(operation, parameterTypes);
 	
 				hora_inicial = qosobserver.tempo1();
-				//Verificar com Nelson se o uso do Reflection ta correto;
 				try{
-					Object res = method.invoke(remoteObj);			
+					Object res = null;
+					if(unmarshaledMsg.getBody().getRequestBody().getParameters().size() > 0){
+						res = method.invoke(remoteObj, unmarshaledMsg.getBody().getRequestBody().getParameters().get(0));
+					} else {
+						res = method.invoke(remoteObj);
+					}
 					
 					if(operation.contains("set")){
 						_add_msgToBeMarshalled = new Message(new MessageHeader(
