@@ -1,6 +1,7 @@
 package aplication;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import distribution.clientproxy.ErroMiddleware;
 
@@ -12,14 +13,9 @@ public class Medicao implements Serializable {
 	private float value;
 	private String grandeza;
 	private String unidade;
+	private Date dataMedicao;
 	private ErroMiddleware erro;
 	
-	public ErroMiddleware getErro() {
-		return erro;
-	}
-	public void setErro(ErroMiddleware erro) {
-		this.erro = erro;
-	}
 	public float getValue() {
 		return value;
 	}
@@ -39,6 +35,18 @@ public class Medicao implements Serializable {
 		this.unidade = unidade;
 	}
 	
+	public Date getDataMedicao() {
+		return dataMedicao;
+	}
+	public void setDataMedicao(Date dataMedicao) {
+		this.dataMedicao = dataMedicao;
+	}
+	public ErroMiddleware getErro() {
+		return erro;
+	}
+	public void setErro(ErroMiddleware erro) {
+		this.erro = erro;
+	}	
 	public Medicao() {
 		super();
 	}

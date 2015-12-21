@@ -1,5 +1,6 @@
 package aplication.client.datamodel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class MedicaoTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		return 3;
+		return 4;
 	}
 	
 	@Override  
@@ -35,6 +36,8 @@ public class MedicaoTableModel extends AbstractTableModel {
             return "Unidade";  
         } else if (column == 2) {
         	return "Grandeza";
+        } else if (column == 3) {
+        	return "Data";
         }
         return "";  
     } 	
@@ -49,6 +52,9 @@ public class MedicaoTableModel extends AbstractTableModel {
 			return m.getUnidade();
 		} else if(columnIndex == 2){
 			return m.getGrandeza();
+		} else if(columnIndex == 3){
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+			return sdf.format(m.getDataMedicao());
 		}
 		return "";
 	}

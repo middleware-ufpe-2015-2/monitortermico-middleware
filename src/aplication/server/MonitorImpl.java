@@ -2,6 +2,7 @@ package aplication.server;
 
 import java.rmi.Remote;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import aplication.IMonitor;
@@ -25,6 +26,7 @@ public class MonitorImpl implements IMonitor, Remote {
 			medicao.setUnidade("Kg/m³");
 		}
 		medicao.setValue((float) (Math.random()*100));
+		medicao.setDataMedicao(new Date());
 		this.medicoes.add(medicao);
 		return this.medicao;
 	}
