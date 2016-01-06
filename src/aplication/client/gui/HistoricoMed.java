@@ -83,10 +83,10 @@ public class HistoricoMed {
 					}
 				} catch(InsufficientMedicoesException e){
 					JOptionPane.showMessageDialog(frmHistoricoMed, "Quantidade de medi\u00E7\u00F5es insuficientes.");
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+//				} catch (UnknownHostException e) {
+//					e.printStackTrace();
+//				} catch (IOException e) {
+//					e.printStackTrace();
 				} catch (Throwable e) {
 					e.printStackTrace();
 				}

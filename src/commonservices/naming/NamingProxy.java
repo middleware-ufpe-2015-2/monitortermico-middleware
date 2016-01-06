@@ -47,7 +47,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		return;
 	}
 
-	public ClientProxy lookup(String serviceName) throws UnknownHostException, IOException, Throwable {
+	public Object lookup(String serviceName){
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -70,7 +70,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		ter = requestor.invoke(inv);
 		
 		// @ Result sent back to Client
-		return (ClientProxy) ter.getResult();
+		return ter.getResult();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
@@ -19,7 +20,7 @@ import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
-
+import aplication.exceptions.ServerNotFoundException;
 import commonservices.naming.NamingProxy;
 
 public class RealizaMed {
@@ -46,53 +47,72 @@ public class RealizaMed {
 		frmMonitorTermico.setBounds(100, 100, 515, 343);
 		frmMonitorTermico.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmMonitorTermico.getContentPane().setLayout(null);
-		
+
 		//add table model
 		this.tableModel = new MedicaoTableModel();
-		
+
 		JButton btnNewButton = new JButton("Realizar Medi\u00E7\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			 
-				try{
-					NamingProxy namingProxy = new NamingProxy("localhost", 1313);
-					
-					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
-					Medicao m = null; 
+
+				//				try{
+				NamingProxy namingProxy = new NamingProxy("localhost", 1313);
+
+				Object monitor = namingProxy.lookup("Monitor");
+
+				Object m = null;
+				
+				System.out.println("B");
+				
+				if (monitor instanceof IMonitor){
+					System.out.println("A");
 					if( (Math.random()*10) > 5){
-						m = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+
+						m = ((IMonitor)monitor).getMedicao(TipoGrandeza.TEMPERATURA);
+
 					} else {
-						m = monitor.getMedicao(TipoGrandeza.UMIDADE);
+
+						m = ((IMonitor)monitor).getMedicao(TipoGrandeza.UMIDADE);
 					}
-					
-					tableModel.inserir(m);
-				} catch (RemoteException re){
-					System.out.println(re.getMessage());
-				} catch (NotBoundException nbe) {
-					System.out.println(nbe.getMessage());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (Throwable e1) {
-					e1.printStackTrace();
+					if (monitor instanceof IMonitor){
+						tableModel.inserir(((Medicao)m));
+					}
+
+				}else{
+					System.out.println(monitor.getClass());
+					JOptionPane
+					.showMessageDialog(null, ((ServerNotFoundException)monitor).getMessage());
 				}
-			}
-		});
+
+				//					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
+
+				//				} catch (RemoteException re){
+				//					System.out.println(re.getMessage());
+				//				} catch (NotBoundException nbe) {
+				//					System.out.println(nbe.getMessage());
+				//				} catch (IOException e1) {
+				//					e1.printStackTrace();
+				//				} catch (Throwable e1) {
+				//					e1.printStackTrace();
+				//				}
+				//			}
+			}});
 		btnNewButton.setBounds(10, 11, 200, 23);
 		frmMonitorTermico.getContentPane().add(btnNewButton);
-		
+
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Medi\u00E7\u00F5es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmMonitorTermico.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout());
-		
+
 		//add table
 		table = new JTable();
 		table.setBounds(6, 16, 398, 187);
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		JTableHeader header = table.getTableHeader();
 		table.setModel(tableModel);
-		
+
 		panel.add(header, BorderLayout.NORTH);
 		panel.add(table, BorderLayout.CENTER);
 	}

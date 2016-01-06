@@ -24,7 +24,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public Medicao getMedicao(TipoGrandeza tipo) {
+	public Object getMedicao(TipoGrandeza tipo) {
 
 		// preparando as variaveis
 		Invocation inv = new Invocation();
@@ -49,13 +49,13 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 
 		ter = requestor.invoke(inv);
 		TableExcpetions table = new TableExcpetions();
-		Medicao result = (Medicao) ter.getResult();
+		Object result = ter.getResult();
 
-		if (ter.getCodeResult() != null) {
-
-			result.setErro(table.buscarError(ter.getCodeResult()));
-
-		}
+//		if (ter.getCodeResult() != null) {
+//
+//			result.setErro(table.buscarError(ter.getCodeResult()));
+//
+//		}
 
 		return result;
 	}
@@ -111,10 +111,10 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 
 		TableExcpetions table = new TableExcpetions();
 		Medicao result = (Medicao) ter.getResult();
-
-		if (ter.getCodeResult() != null) {
-			result.setErro(table.buscarError(ter.getCodeResult()));
-		}
+//
+//		if (ter.getCodeResult() != null) {
+//			result.setErro(table.buscarError(ter.getCodeResult()));
+//		}
 
 		return result;
 	}

@@ -21,10 +21,10 @@ public class ClientMonitor {
 		
 		while(true){
 			try {
-				Medicao m1 = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+				Medicao m1 = (Medicao) monitor.getMedicao(TipoGrandeza.TEMPERATURA);
 				System.out.println("Temperatura: "+m1.getValue()+ ", Unidade: "+m1.getUnidade());
 				
-				Medicao m2 = monitor.getMedicao(TipoGrandeza.UMIDADE);
+				Medicao m2 = (Medicao) monitor.getMedicao(TipoGrandeza.UMIDADE);
 				System.out.println("Temperatura: "+m2.getValue()+ ", Unidade: "+m2.getUnidade());
 			} catch (Throwable e) {
 				System.err.println(e.getMessage());
