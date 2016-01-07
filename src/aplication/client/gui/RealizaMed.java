@@ -22,6 +22,9 @@ import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
 import aplication.exceptions.ServerNotFoundException;
 import commonservices.naming.NamingProxy;
+import distribution.clientproxy.ClientProxy;
+import distribution.clientproxy.IMonitorProxy;
+import distribution.clientproxy.MonitorProxy;
 
 public class RealizaMed {
 
@@ -64,21 +67,23 @@ public class RealizaMed {
 				
 				System.out.println("B");
 				
-				if (monitor instanceof IMonitor){
+				if (monitor instanceof ClientProxy){
 					System.out.println("A");
 					if( (Math.random()*10) > 5){
-
-						m = ((IMonitor)monitor).getMedicao(TipoGrandeza.TEMPERATURA);
-
-					} else {
-
-						m = ((IMonitor)monitor).getMedicao(TipoGrandeza.UMIDADE);
+						
+						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.TEMPERATURA);
+						
+					} else{
+						
+						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.UMIDADE);
 					}
-					if (monitor instanceof IMonitor){
-						tableModel.inserir(((Medicao)m));
-					}
+					
+					System.out.println(m.getClass());
+					//Erro, está tentando dar um cast de ServerNotFoundException Para medição
+					tableModel.inserir(((Medicao)m));
 
 				}else{
+					System.out.println(monitor.getClass());
 					System.out.println(monitor.getClass());
 					JOptionPane
 					.showMessageDialog(null, ((ServerNotFoundException)monitor).getMessage());
