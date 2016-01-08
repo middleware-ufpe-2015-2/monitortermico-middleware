@@ -36,7 +36,7 @@ public class PluginHTTP extends Plugin {
 	@Override
 	public void send(byte[] msg) throws UnknownHostException, IOException {
 
-		try {
+//		try {
 			if (!isServer) {
 
 				URL url = new URL("http://" + host + ":" + port);
@@ -65,15 +65,15 @@ public class PluginHTTP extends Plugin {
 				in.close();
 				clientSocket.close();
 			}
-		} catch (IOException e) {
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		} catch (IOException e) {
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 	}
 
 	@Override
 	public byte[] receive() throws IOException {
 		byte[] msg = null;
-		try {
+//		try {
 			if (isServer) {
 
 				welcomeSocket = new ServerSocket(port);
@@ -114,9 +114,9 @@ public class PluginHTTP extends Plugin {
 				in.close();
 				con.disconnect();
 			}
-		} catch (IOException e) {
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		} catch (IOException e) {
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 		return msg;
 	}
 

@@ -30,7 +30,7 @@ public class PluginUDP extends Plugin {
 
 		DatagramPacket req = null;
 
-		try{
+//		try{
 			byte[] msgSize = String.valueOf(msg.length).getBytes();
 
 			// se for cliente, abre conexao socket
@@ -64,9 +64,9 @@ public class PluginUDP extends Plugin {
 			// Servidor fecha a conexao aqui
 			if (isServer)
 				s.close();
-		}catch(IOException e){
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		}catch(IOException e){
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 
 	}
 
@@ -80,7 +80,7 @@ public class PluginUDP extends Plugin {
 		byte[] buffer = new byte[10000];
 		byte[] msg = null;
 
-		try{
+//		try{
 			// cria datagrama para receber request do cliente
 			recievePackege = new DatagramPacket(buffer, buffer.length);
 			s.receive(recievePackege);
@@ -98,9 +98,9 @@ public class PluginUDP extends Plugin {
 			// cliente fecha a conexao aqui
 			if (!isServer)
 				s.close();
-		}catch(IOException e){
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		}catch(IOException e){
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 		return msg;
 	}
 

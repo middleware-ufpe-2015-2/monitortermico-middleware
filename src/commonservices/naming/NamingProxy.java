@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
@@ -47,7 +48,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		return;
 	}
 
-	public Object lookup(String serviceName){
+	public Object lookup(String serviceName) throws ServerNotFoundException{
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();

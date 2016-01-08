@@ -60,34 +60,56 @@ public class RealizaMed {
 
 				//				try{
 				NamingProxy namingProxy = new NamingProxy("localhost", 1313);
-
-				Object monitor = namingProxy.lookup("Monitor");
-
-				Object m = null;
+																				
 				
-				System.out.println("B");
-				
-				if (monitor instanceof ClientProxy){
-					System.out.println("A");
-					if( (Math.random()*10) > 5){
-						
-						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.TEMPERATURA);
-						
-					} else{
-						
-						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.UMIDADE);
-					}
+				try {
 					
-					System.out.println(m.getClass());
-					//Erro, está tentando dar um cast de ServerNotFoundException Para medição
-					tableModel.inserir(((Medicao)m));
+					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");
+					
+					Medicao m = null;
+				
+					if( (Math.random()*10) > 5){
 
-				}else{
-					System.out.println(monitor.getClass());
-					System.out.println(monitor.getClass());
+						m = monitor.getMedicao(TipoGrandeza.TEMPERATURA);
+
+					} else{
+
+						m = monitor.getMedicao(TipoGrandeza.UMIDADE);
+					}
+														
+					tableModel.inserir(m);
+									
+				} catch (ServerNotFoundException e1) {
+					
 					JOptionPane
-					.showMessageDialog(null, ((ServerNotFoundException)monitor).getMessage());
+					.showMessageDialog(null, e1.getMessage());
 				}
+
+//				Object m = null;
+//				
+//				System.out.println("B");
+//				
+//				if (monitor instanceof MonitorProxy){
+//					System.out.println("A");
+//					if( (Math.random()*10) > 5){
+//						
+//						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.TEMPERATURA);
+//						
+//					} else{
+//						
+//						m = ((MonitorProxy)monitor).getMedicao(TipoGrandeza.UMIDADE);
+//					}
+//					
+//					System.out.println(m.getClass());
+//					//Erro, está tentando dar um cast de ServerNotFoundException Para medição
+//					tableModel.inserir(((Medicao)m));
+//
+//				}else{
+//					System.out.println(monitor.getClass());
+//					System.out.println(monitor.getClass());
+//					JOptionPane
+//					.showMessageDialog(null, ((ServerNotFoundException)monitor).getMessage());
+//				}
 
 				//					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");				
 

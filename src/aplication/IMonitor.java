@@ -3,13 +3,14 @@ package aplication;
 import java.util.List;
 
 import aplication.exceptions.InsufficientMedicoesException;
+import aplication.exceptions.ServerNotFoundException;
 
 
 public interface IMonitor {
 	
-	public Object getMedicao(TipoGrandeza tipo);
-	public void setmedicao(Medicao m);
-	public Medicao getMedicaoAnterior();
-	public List<Medicao> getCincoUltimasMedicoes() throws InsufficientMedicoesException;
+	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException;
+	public void setmedicao(Medicao m) throws ServerNotFoundException;
+	public Medicao getMedicaoAnterior() throws ServerNotFoundException;
+	public List<Medicao> getCincoUltimasMedicoes() throws InsufficientMedicoesException, ServerNotFoundException;
 
 }

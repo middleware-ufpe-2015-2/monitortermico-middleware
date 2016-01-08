@@ -6,6 +6,7 @@ import java.util.List;
 import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
+import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Termination;
 import distribution.requestor.Requestor;
@@ -24,7 +25,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public Object getMedicao(TipoGrandeza tipo) {
+	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException {
 
 		// preparando as variaveis
 		Invocation inv = new Invocation();
@@ -49,7 +50,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 
 		ter = requestor.invoke(inv);
 		TableExcpetions table = new TableExcpetions();
-		Object result = ter.getResult();
+		Medicao result = (Medicao) ter.getResult();
 
 //		if (ter.getCodeResult() != null) {
 //
@@ -61,7 +62,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public void setmedicao(Medicao m) {
+	public void setmedicao(Medicao m) throws ServerNotFoundException {
 
 		// preparando as variaveis
 		Invocation inv = new Invocation();
@@ -87,7 +88,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 	}
 
 	@Override
-	public Medicao getMedicaoAnterior() {
+	public Medicao getMedicaoAnterior() throws ServerNotFoundException{
 
 		// preparando as variaveis
 		Invocation inv = new Invocation();
@@ -121,7 +122,7 @@ public class MonitorProxy extends ClientProxy implements IMonitor {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Medicao> getCincoUltimasMedicoes() {
+	public List<Medicao> getCincoUltimasMedicoes() throws ServerNotFoundException {
 
 		// preparando as variaveis
 		Invocation inv = new Invocation();

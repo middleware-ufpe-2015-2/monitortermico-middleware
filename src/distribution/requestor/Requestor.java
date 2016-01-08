@@ -24,7 +24,7 @@ public class Requestor implements IRequestor {
 	private ClientRequestHandler crh;
 
 	@Override
-	public Termination invoke(Invocation inv) {
+	public Termination invoke(Invocation inv)throws ServerNotFoundException {
 			
 		Marshaller marshaller = new Marshaller();
 		Termination termination= new Termination();
@@ -55,8 +55,12 @@ public class Requestor implements IRequestor {
 			//unmarshall reply message
 			msgUnMarshalled = marshaller.unmarshall(msgToBeUnMarshalled);
 		}catch (Throwable e){
-			termination.setResult(new ServerNotFoundException("Servidor Indisponível."));
-			return termination;
+			
+			
+			throw new ServerNotFoundException("Servidor Indisponível.");
+			
+//			termination.setResult(new ServerNotFoundException("Servidor Indisponível."));
+//			return termination;
 		}
 
 //		} catch(UnknownHostException It){
@@ -67,8 +71,7 @@ public class Requestor implements IRequestor {
 //			termination.setCodeResult(405);
 //			return termination;	
 //		}
-//		catch(ClassNotFoundException Cnf){
-//			termination.setCodeResult(410);
+//		catch(ClassNotFoundException Cnf){ 
 //			return termination;	
 //		} 
 //		catch (InterruptedException e) {
