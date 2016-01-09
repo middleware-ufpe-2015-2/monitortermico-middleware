@@ -15,6 +15,7 @@ public class Medicao implements Serializable {
 	private String unidade;
 	private Date dataMedicao;
 	private ErroMiddleware erro;
+	private static int idMedicao = 1;
 	
 	public float getValue() {
 		return value;
@@ -47,6 +48,11 @@ public class Medicao implements Serializable {
 	public void setErro(ErroMiddleware erro) {
 		this.erro = erro;
 	}	
+	
+	public int getIdMedicao(){
+		return Medicao.idMedicao;
+	}
+	
 	public Medicao() {
 		super();
 	}
@@ -55,6 +61,7 @@ public class Medicao implements Serializable {
 		this.value = value;
 		this.grandeza = grandeza;
 		this.unidade = unidade;
+		Medicao.idMedicao++;
 	}
 
 }
