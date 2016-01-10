@@ -74,7 +74,7 @@ public class RealizaMed {
 					.showMessageDialog(null, se.getMessage());										
 				} 
 				
-				//Erro deverá ser informado e equipo do naming service.
+				//Erro deverá ser informado e equipe do naming service.
 				catch (ClassCastException ce){
 					
 					JOptionPane
