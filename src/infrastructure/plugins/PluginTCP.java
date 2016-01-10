@@ -31,7 +31,7 @@ public class PluginTCP extends Plugin {
 
 	public void send(byte[] msg) throws IOException {
 
-		try{
+//		try{
 			//se for cliente, abre conexao socket
 			if (!isServer) {
 				clientSocket = new Socket(this.host, this.port);
@@ -52,9 +52,9 @@ public class PluginTCP extends Plugin {
 				out.close();
 				in.close();
 			}
-		}catch(IOException e){
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		}catch(IOException e){
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 		return;
 	}
 
@@ -62,7 +62,7 @@ public class PluginTCP extends Plugin {
 		
 		byte[] msg = null;		
 
-		try{
+//		try{
 			//se for servidor, cria um servidor socket 
 			if (isServer) {
 				welcomeSocket = new ServerSocket(port);
@@ -82,9 +82,9 @@ public class PluginTCP extends Plugin {
 				out.close();
 				in.close();
 			}
-		}catch(IOException e){
-			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-		}
+//		}catch(IOException e){
+//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+//		}
 		return msg;
 	}
 

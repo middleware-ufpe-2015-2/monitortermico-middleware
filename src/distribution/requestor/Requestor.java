@@ -5,6 +5,7 @@ import infrastructure.clientrequesthandler.ClientRequestHandler;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Message;
 import distribution.MessageBody;
@@ -23,7 +24,7 @@ public class Requestor implements IRequestor {
 	private ClientRequestHandler crh;
 
 	@Override
-	public Termination invoke(Invocation inv) {
+	public Termination invoke(Invocation inv) throws ServerNotFoundException {
 			
 		Marshaller marshaller = new Marshaller();
 		Termination termination= new Termination();
@@ -54,22 +55,22 @@ public class Requestor implements IRequestor {
 			//unmarshall reply message
 			msgUnMarshalled = marshaller.unmarshall(msgToBeUnMarshalled);
 
-		} catch(UnknownHostException It){
-			termination.setCodeResult(400);
-			return termination;		
-		}
-		catch(IOException I){
-			termination.setCodeResult(405);
-			return termination;	
-		}
-		catch(ClassNotFoundException Cnf){
-			termination.setCodeResult(410);
-			return termination;	
 		} 
-		catch (InterruptedException e) {
-			termination.setCodeResult(415);
-			return termination;	
+		
+		catch (IOException e){
+		
+			throw new ServerNotFoundException("Servidor Indisponível.");
+		}catch (InterruptedException e){
+			
+			throw new ServerNotFoundException("O servidor está demorando muito para responder, verifique sua conexão e tente novamente.");
+		}catch(ClassNotFoundException e){
+			
+			throw new ServerNotFoundException("Servidor Indisponível 2.");
 		}
+//		catch (Throwable e){
+//			
+//			throw new ServerNotFoundException("Servidor Indisponível 3.");
+//		}
 					
 		//return result to Client Proxy
 		termination.setCodeResult(msgUnMarshalled.getHeader().getMessageType());

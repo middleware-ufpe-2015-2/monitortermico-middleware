@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
@@ -19,7 +20,7 @@ import aplication.IMonitor;
 import aplication.Medicao;
 import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
-
+import aplication.exceptions.ServerNotFoundException;
 import commonservices.naming.NamingProxy;
 
 public class RealizaMed {
@@ -66,15 +67,19 @@ public class RealizaMed {
 					}
 					
 					tableModel.inserir(m);
-				} catch (RemoteException re){
-					System.out.println(re.getMessage());
-				} catch (NotBoundException nbe) {
-					System.out.println(nbe.getMessage());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (Throwable e1) {
-					e1.printStackTrace();
-				}
+					
+				} catch (ServerNotFoundException se){
+					
+					JOptionPane
+					.showMessageDialog(null, se.getMessage());										
+				} 
+				
+				//Erro deverá ser informado e equipo do naming service.
+				catch (ClassCastException ce){
+					
+					JOptionPane
+					.showMessageDialog(null, ce.getMessage());
+				} 
 			}
 		});
 		btnNewButton.setBounds(10, 11, 200, 23);

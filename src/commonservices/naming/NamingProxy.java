@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
@@ -21,7 +22,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		this.port = p;	
 	}
 
-	public void bind(String serviceName, ClientProxy clientProxy) throws UnknownHostException, IOException, Throwable {
+	public void bind(String serviceName, ClientProxy clientProxy) throws ServerNotFoundException {
 		Invocation inv = new Invocation();
 		new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -47,7 +48,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		return;
 	}
 
-	public ClientProxy lookup(String serviceName) throws UnknownHostException, IOException, Throwable {
+	public ClientProxy lookup(String serviceName) throws ServerNotFoundException  {
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -74,7 +75,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 	}
 
 	@Override
-	public ArrayList<String> list() throws UnknownHostException, IOException, Throwable {
+	public ArrayList<String> list() throws ServerNotFoundException  {
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>(0);
