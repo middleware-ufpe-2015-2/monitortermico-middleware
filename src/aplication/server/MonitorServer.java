@@ -6,7 +6,7 @@ import java.rmi.RemoteException;
 
 import commonservices.naming.NamingProxy;
 
-import distribution.clientproxy.MonitorProxy;
+import distribution.clientproxy.ClientProxy;
 import distribution.invoker.MonitorInvoker;
 
 public class MonitorServer implements Serializable {
@@ -17,7 +17,7 @@ public class MonitorServer implements Serializable {
 		MonitorInvoker monitorInvoker = new MonitorInvoker();
 		
 		//remote object
-		MonitorProxy monitorProxy = new MonitorProxy();
+		ClientProxy monitorProxy = new ClientProxy();
 		monitorProxy.setHost("localhost");
 		monitorProxy.setPort(2001);
 		

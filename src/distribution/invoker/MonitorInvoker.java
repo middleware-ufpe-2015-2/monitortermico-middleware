@@ -54,11 +54,13 @@ public class MonitorInvoker extends AbstractInvoker {
 			boolean encontrou = false;
 			int qtdTentativas = 0;
 			long tempoTentativa = 2000L;
+			
 			while (!encontrou) {
 				try {
 					// Obtém o Objeto Remoto
 					remoteObj = this.medicaoPool.obterObjeto();
 					encontrou = true;
+				
 				} catch(TamanhoPoolException tpe) {
 					qtdTentativas = qtdTentativas + 1;
 					if (qtdTentativas == UtilsConf.QTD_MAX_TENTATIVAS){

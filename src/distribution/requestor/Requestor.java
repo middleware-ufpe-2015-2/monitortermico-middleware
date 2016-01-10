@@ -67,10 +67,10 @@ public class Requestor implements IRequestor {
 			
 			throw new ServerNotFoundException("Servidor Indisponível 2.");
 		}
-//		catch (Throwable e){
-//			
-//			throw new ServerNotFoundException("Servidor Indisponível 3.");
-//		}
+		catch (Throwable e){
+			
+			throw new ServerNotFoundException("Servidor Indisponível 3.");
+		}
 					
 		//return result to Client Proxy
 		termination.setCodeResult(msgUnMarshalled.getHeader().getMessageType());

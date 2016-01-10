@@ -89,12 +89,7 @@ public class HistoricoMed {
 		
 					JOptionPane.showMessageDialog(null, se.getMessage());
 				}
-				
-				catch (ClassCastException ce){
 
-					JOptionPane
-					.showMessageDialog(null, ce.getMessage());
-				}
 				catch (Throwable e) {
 					e.printStackTrace();
 				}

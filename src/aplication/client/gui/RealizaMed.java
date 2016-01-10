@@ -75,11 +75,6 @@ public class RealizaMed {
 				} 
 				
 				//Erro deverá ser informado e equipe do naming service.
-				catch (ClassCastException ce){
-					
-					JOptionPane
-					.showMessageDialog(null, ce.getMessage());
-				} 
 			}
 		});
 		btnNewButton.setBounds(10, 11, 200, 23);
