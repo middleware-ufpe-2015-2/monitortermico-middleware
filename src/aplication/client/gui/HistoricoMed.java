@@ -2,7 +2,10 @@ package aplication.client.gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -13,19 +16,11 @@ import javax.swing.table.JTableHeader;
 
 import aplication.IMonitor;
 import aplication.Medicao;
-import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
 import aplication.exceptions.InsufficientMedicoesException;
 import aplication.exceptions.ServerNotFoundException;
 
-import javax.swing.JButton;
-
 import commonservices.naming.NamingProxy;
-
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.List;
 
 public class HistoricoMed {
 	private JFrame frmHistoricoMed;
@@ -43,63 +38,65 @@ public class HistoricoMed {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	public void initialize(){
+	public void initialize() {
 		frmHistoricoMed = new JFrame();
 		frmHistoricoMed.setTitle("Hist\u00f3rico de Medi\u00E7\u00F5es");
 		frmHistoricoMed.setBounds(100, 100, 515, 343);
 		frmHistoricoMed.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmHistoricoMed.getContentPane().setLayout(null);
-		
-		//add table model
+
+		// add table model
 		this.tableModel = new MedicaoTableModel();
-		
+
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, "\u00daltimas Medi\u00E7\u00F5es Realizadas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBorder(new TitledBorder(null,
+				"\u00daltimas Medi\u00E7\u00F5es Realizadas",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(4, 35, 410, 210);
 		frmHistoricoMed.getContentPane().add(panel);
 		panel.setLayout(new BorderLayout());
-		
-		//add table
+
+		// add table
 		table = new JTable();
 		table.setBounds(6, 16, 398, 187);
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null,
+				null));
 		JTableHeader header = table.getTableHeader();
 		table.setModel(tableModel);
-		
+
 		panel.add(header, BorderLayout.NORTH);
 		panel.add(table, BorderLayout.CENTER);
-		
-		JButton btnRecuperarMedicoes = new JButton("Recuperar Medi\u00E7\u00F5es");
+
+		JButton btnRecuperarMedicoes = new JButton(
+				"Recuperar Medi\u00E7\u00F5es");
 		btnRecuperarMedicoes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				NamingProxy namingProxy = new NamingProxy("localhost", 1313);
-				try{
+				try {
 					IMonitor monitor = (IMonitor) namingProxy.lookup("Monitor");
 					List<Medicao> lista = monitor.getCincoUltimasMedicoes();
-					if(lista==null){
+					if (lista == null) {
 						throw new InsufficientMedicoesException(0);
 					}
-					for(Medicao m: lista){
+					for (Medicao m : lista) {
 						tableModel.inserir(m);
 					}
-				} catch(InsufficientMedicoesException e){
-					JOptionPane.showMessageDialog(frmHistoricoMed, "Quantidade de medi\u00E7\u00F5es insuficientes.");
-				} 
-				catch (ServerNotFoundException se) {
-		
-					JOptionPane.showMessageDialog(null, se.getMessage());
-				}
+				} catch (InsufficientMedicoesException e) {
+					JOptionPane.showMessageDialog(frmHistoricoMed,
+							"Quantidade de medi\u00E7\u00F5es insuficientes.");
+				} catch (ServerNotFoundException se) {
 
-				catch (Throwable e) {
+					JOptionPane.showMessageDialog(frmHistoricoMed,
+							se.getMessage());
+				} catch (Throwable e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 		btnRecuperarMedicoes.setBounds(131, 256, 129, 23);
 		frmHistoricoMed.getContentPane().add(btnRecuperarMedicoes);
-		
-		
+
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -107,7 +104,6 @@ public class HistoricoMed {
 
 	}
 
-	
 	public JTable getTable() {
 		return table;
 	}

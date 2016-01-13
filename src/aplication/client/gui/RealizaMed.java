@@ -3,9 +3,6 @@ package aplication.client.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +18,7 @@ import aplication.Medicao;
 import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
 import aplication.exceptions.ServerNotFoundException;
+
 import commonservices.naming.NamingProxy;
 
 public class RealizaMed {

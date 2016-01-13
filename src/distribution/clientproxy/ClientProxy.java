@@ -84,6 +84,7 @@ public class ClientProxy implements IMonitor, Serializable {
 		return result;
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void setmedicao(Medicao m) throws ServerNotFoundException{
 
@@ -110,6 +111,7 @@ public class ClientProxy implements IMonitor, Serializable {
 		ter = requestor.invoke(inv);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public Medicao getMedicaoAnterior() throws ServerNotFoundException{
 

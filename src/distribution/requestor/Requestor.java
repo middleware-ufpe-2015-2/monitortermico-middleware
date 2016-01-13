@@ -3,7 +3,6 @@ package distribution.requestor;
 import infrastructure.clientrequesthandler.ClientRequestHandler;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
