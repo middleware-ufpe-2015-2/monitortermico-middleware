@@ -3,8 +3,10 @@ package infrastructure.plugins;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import aplication.exceptions.ServerNotFoundException;
 
 public class PluginTCP extends Plugin {
 
@@ -29,9 +31,9 @@ public class PluginTCP extends Plugin {
 		this.isServer = isServer;
 	}
 
-	public void send(byte[] msg) throws IOException {
+	public void send(byte[] msg) throws IOException, ServerNotFoundException {
 
-//		try{
+		try{
 			//se for cliente, abre conexao socket
 			if (!isServer) {
 				clientSocket = new Socket(this.host, this.port);
@@ -52,17 +54,19 @@ public class PluginTCP extends Plugin {
 				out.close();
 				in.close();
 			}
-//		}catch(IOException e){
-//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-//		}
+		}catch(ConnectException e){
+			throw new ServerNotFoundException();
+		}catch(IOException e){
+			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+		}
 		return;
 	}
 
-	public byte[] receive() throws IOException {
+	public byte[] receive() throws IOException, ServerNotFoundException {
 		
 		byte[] msg = null;		
 
-//		try{
+		try{
 			//se for servidor, cria um servidor socket 
 			if (isServer) {
 				welcomeSocket = new ServerSocket(port);
@@ -82,9 +86,11 @@ public class PluginTCP extends Plugin {
 				out.close();
 				in.close();
 			}
-//		}catch(IOException e){
-//			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
-//		}
+		}catch(ConnectException e){
+			throw new ServerNotFoundException();
+		}catch(IOException e){
+			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
+		}
 		return msg;
 	}
 

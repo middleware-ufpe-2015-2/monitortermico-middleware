@@ -5,6 +5,8 @@ import infrastructure.plugins.ProtocolType;
 
 import java.io.IOException;
 
+import aplication.exceptions.ServerNotFoundException;
+
 public class ServerRequestHandler {
 	private int port;
 	private Plugin plug;
@@ -17,13 +19,13 @@ public class ServerRequestHandler {
 
 	}
 
-	public byte [] receive() throws IOException, Throwable {
+	public byte [] receive() throws IOException, Throwable, ServerNotFoundException {
 		byte [] rcvMsg = null;
 		rcvMsg=plug.receive();				
 		return rcvMsg;
 	}
 
-	public void send(byte [] msg) throws IOException, InterruptedException {
+	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException {
 		plug.send(msg);
 		return;
 	}
