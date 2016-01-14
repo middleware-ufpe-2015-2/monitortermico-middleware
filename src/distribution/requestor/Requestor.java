@@ -14,6 +14,7 @@ import distribution.RequestBody;
 import distribution.RequestHeader;
 import distribution.Termination;
 import distribution.marshaller.Marshaller;
+import distribution.pooling.exception.TamanhoPoolException;
 
 public class Requestor implements IRequestor {
 	
@@ -24,7 +25,7 @@ public class Requestor implements IRequestor {
 	private ClientRequestHandler crh;
 
 	@Override
-	public Termination invoke(Invocation inv) throws ServerNotFoundException {
+	public Termination invoke(Invocation inv) throws ServerNotFoundException, TamanhoPoolException {
 			
 		Marshaller marshaller = new Marshaller();
 		Termination termination= new Termination();
@@ -57,19 +58,14 @@ public class Requestor implements IRequestor {
 
 		} 
 		
-		catch (IOException e){
-		
-			throw new ServerNotFoundException("Servidor Indisponível.");
-		}catch (InterruptedException e){
-			
-			throw new ServerNotFoundException("O servidor está demorando muito para responder, verifique sua conexão e tente novamente.");
-		}catch(ClassNotFoundException e){
-			
-			throw new ServerNotFoundException("Servidor Indisponível 2.");
-		}
 		catch (Throwable e){
+			int messageType = msgUnMarshalled.getHeader().getMessageType();
+			if (messageType == 171){
+				throw new TamanhoPoolException(msgUnMarshalled.getBody().getReplyBody().toString());
+			}else{
+				throw new ServerNotFoundException("Servidor Indisponível, tente novamente mais tarde. Código do erro: 3.");
+			}			
 			
-			throw new ServerNotFoundException("Servidor Indisponível 3.");
 		}
 					
 		//return result to Client Proxy

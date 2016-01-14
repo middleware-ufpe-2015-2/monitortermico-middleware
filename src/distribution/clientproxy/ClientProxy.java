@@ -10,6 +10,7 @@ import aplication.TipoGrandeza;
 import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Termination;
+import distribution.pooling.exception.TamanhoPoolException;
 import distribution.requestor.Requestor;
 
 public class ClientProxy implements IMonitor, Serializable {
@@ -54,16 +55,12 @@ public class ClientProxy implements IMonitor, Serializable {
 		super();
 	}
 	
-	public Termination invokeMethod(String methodname, Object parameter) throws ServerNotFoundException{
+	public Termination invokeMethod(String methodname, Object parameter) throws ServerNotFoundException, TamanhoPoolException{
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
 		
 		Requestor requestor = new Requestor();
-
-		// Preenche variaveis temporarias
-		
-		
 
 		// preenche os parametros da chamada
 		inv.setClientProxy(new ClientProxy());
@@ -81,20 +78,20 @@ public class ClientProxy implements IMonitor, Serializable {
 	}
 
 	@Override
-	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException{
+	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException, TamanhoPoolException{
 		class Local{};
 		Medicao result = (Medicao) invokeMethod(Local.class.getEnclosingMethod().getName(), tipo).getResult();	
 		return result;
 	}
 
 	@Override
-	public void setmedicao(Medicao m) throws ServerNotFoundException{
+	public void setmedicao(Medicao m) throws ServerNotFoundException, TamanhoPoolException{
 		class Local{};
 		invokeMethod(Local.class.getEnclosingMethod().getName(), m);
 	}
 
 	@Override
-	public Medicao getMedicaoAnterior() throws ServerNotFoundException{
+	public Medicao getMedicaoAnterior() throws ServerNotFoundException, TamanhoPoolException{
 
 		class Local {};	
 		Medicao result = (Medicao) invokeMethod(Local.class.getEnclosingMethod().getName(), null).getResult();
@@ -103,7 +100,7 @@ public class ClientProxy implements IMonitor, Serializable {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Medicao> getCincoUltimasMedicoes() throws ServerNotFoundException{
+	public List<Medicao> getCincoUltimasMedicoes() throws ServerNotFoundException, TamanhoPoolException{
 
 		class Local{};
 		// TODO Auto-generated method stub

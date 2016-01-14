@@ -8,6 +8,7 @@ import aplication.exceptions.ServerNotFoundException;
 import distribution.Invocation;
 import distribution.Termination;
 import distribution.clientproxy.ClientProxy;
+import distribution.pooling.exception.TamanhoPoolException;
 import distribution.requestor.Requestor;
 
 public class NamingProxy extends ClientProxy implements INaming {
@@ -22,7 +23,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		this.port = p;	
 	}
 
-	public void bind(String serviceName, ClientProxy clientProxy) throws ServerNotFoundException {
+	public void bind(String serviceName, ClientProxy clientProxy) throws ServerNotFoundException, TamanhoPoolException {
 		Invocation inv = new Invocation();
 		new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -48,7 +49,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 		return;
 	}
 
-	public ClientProxy lookup(String serviceName) throws ServerNotFoundException  {
+	public ClientProxy lookup(String serviceName) throws ServerNotFoundException, TamanhoPoolException  {
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
@@ -75,7 +76,7 @@ public class NamingProxy extends ClientProxy implements INaming {
 	}
 
 	@Override
-	public ArrayList<String> list() throws ServerNotFoundException  {
+	public ArrayList<String> list() throws ServerNotFoundException, TamanhoPoolException  {
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>(0);

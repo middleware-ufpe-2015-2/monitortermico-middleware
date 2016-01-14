@@ -22,6 +22,7 @@ import aplication.TipoGrandeza;
 import aplication.client.datamodel.MedicaoTableModel;
 import aplication.exceptions.ServerNotFoundException;
 import commonservices.naming.NamingProxy;
+import distribution.pooling.exception.TamanhoPoolException;
 
 public class RealizaMed {
 
@@ -72,6 +73,10 @@ public class RealizaMed {
 					
 					JOptionPane
 					.showMessageDialog(null, se.getMessage());										
+				} catch (TamanhoPoolException tpe) {
+					// TODO Auto-generated catch block
+					JOptionPane
+					.showMessageDialog(null, tpe.getMessage());
 				} 
 				
 				//Erro deverá ser informado e equipe do naming service.

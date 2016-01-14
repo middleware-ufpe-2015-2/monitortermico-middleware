@@ -1,4 +1,4 @@
-package distribution.invoker;
+                                                                                                                                                   package distribution.invoker;
 
 import infrastructure.qosobserver.IQosObserver;
 import infrastructure.qosobserver.QosObserver;
@@ -53,7 +53,7 @@ public class MonitorInvoker extends AbstractInvoker {
 			MonitorImpl remoteObj = null;
 			boolean encontrou = false;
 			int qtdTentativas = 0;
-			long tempoTentativa = 2000L;
+			long tempoTentativa = 200L;
 			
 			while (!encontrou) {
 				try {

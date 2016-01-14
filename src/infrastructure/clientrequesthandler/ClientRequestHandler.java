@@ -6,6 +6,7 @@ import infrastructure.plugins.ProtocolType;
 import java.io.IOException;
 
 import aplication.exceptions.ServerNotFoundException;
+import distribution.pooling.exception.TamanhoPoolException;
 
 public class ClientRequestHandler {
 	
@@ -22,7 +23,7 @@ public class ClientRequestHandler {
 		protocol.send(msg);
 	}
 
-	public byte [] receive() throws IOException, InterruptedException, ClassNotFoundException, ServerNotFoundException {
+	public byte [] receive() throws IOException, InterruptedException, ClassNotFoundException, ServerNotFoundException, TamanhoPoolException {
 		
 		byte [] msg;
 		msg = protocol.receive();
