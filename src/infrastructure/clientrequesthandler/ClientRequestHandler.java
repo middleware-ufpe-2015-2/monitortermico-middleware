@@ -5,6 +5,8 @@ import infrastructure.plugins.ProtocolType;
 
 import java.io.IOException;
 
+import aplication.exceptions.ServerNotFoundException;
+
 public class ClientRequestHandler {
 	
 	private Plugin protocol;
@@ -16,11 +18,11 @@ public class ClientRequestHandler {
 
 	}
 
-	public void send(byte [] msg) throws IOException, InterruptedException {
+	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException {
 		protocol.send(msg);
 	}
 
-	public byte [] receive() throws IOException, InterruptedException, ClassNotFoundException {
+	public byte [] receive() throws IOException, InterruptedException, ClassNotFoundException, ServerNotFoundException {
 		
 		byte [] msg;
 		msg = protocol.receive();

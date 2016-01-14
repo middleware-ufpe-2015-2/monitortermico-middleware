@@ -19,10 +19,9 @@ public class ProtocolType {
 			protocol = new PluginTCP(host, port, false);
 		} else if (name.equalsIgnoreCase("UDP")) {
 			protocol = new PluginUDP(host, port, false);
-		} 
-//		else if (name.equalsIgnoreCase("HTTP")) {
-//			protocol = new PluginHTTP(host, port, false);
-//		}
+		} else if (name.equalsIgnoreCase("HTTP")) {
+			protocol = new PluginHTTP(host, port, false);
+		}
 
 		return protocol;
 	}
@@ -33,11 +32,9 @@ public class ProtocolType {
 			protocol = new PluginTCP(null, port, true);
 		} else if (name.equalsIgnoreCase("UDP")) {
 			protocol = new PluginUDP(null, port, true);
-		} 
-		
-//		else if (name.equalsIgnoreCase("HTTP")) {
-//			protocol = new PluginHTTP(null, port, true);
-//		}
+		} else if (name.equalsIgnoreCase("HTTP")) {
+			protocol = new PluginHTTP(null, port, true);
+		}
 
 		return protocol;
 	}

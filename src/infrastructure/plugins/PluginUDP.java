@@ -1,14 +1,18 @@
 package infrastructure.plugins;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import aplication.exceptions.ServerNotFoundException;
+import distribution.Message;
+
 public class PluginUDP extends Plugin {
 
-	private DatagramSocket s = null;
+	private DatagramSocket socket = null;
 	private DatagramPacket recievePackege = null;
 
 	private boolean isServer;
@@ -26,7 +30,7 @@ public class PluginUDP extends Plugin {
 	}
 
 	@Override
-	public void send(byte[] msg) throws UnknownHostException, IOException {
+	public void send(byte[] msg) throws UnknownHostException, IOException, ServerNotFoundException {
 
 		DatagramPacket req = null;
 
@@ -35,35 +39,36 @@ public class PluginUDP extends Plugin {
 
 			// se for cliente, abre conexao socket
 			if (!isServer) {
-				s = new DatagramSocket();
+				socket = new DatagramSocket();
 				InetAddress serv = InetAddress.getByName(host);
 
 				// envia o tamanho da mensagem
-				DatagramPacket req2 = new DatagramPacket(String.valueOf(msg.length).getBytes(), msgSize.length, serv, port);
-				s.send(req2);
+				DatagramPacket req2 = new DatagramPacket(msgSize, msgSize.length, serv, port);
+				socket.send(req2);
 
 				// caso seja cliente, vai enviar pra o ip e a porta passado
 				req = new DatagramPacket(msg, msg.length, serv, port);
 
 			} else {
 				//envia o tamanho da mensagem
-				DatagramPacket req2 = new DatagramPacket(String.valueOf(msg.length).getBytes(), msgSize.length,
+				DatagramPacket req2 = new DatagramPacket(msgSize, msgSize.length,
 						recievePackege.getAddress(), recievePackege.getPort());
 
-				s.send(req2);
+				socket.send(req2);
 				// caso seja servidor, vai enviar o packege de volta ao endereco
 				// recebido
 				req = new DatagramPacket(msg, msg.length, recievePackege.getAddress(), recievePackege.getPort());
 			}
 
 			// envia datagrama contendo a mensagem
-			s.send(req);
+			socket.send(req);
 
-			// s.setSoTimeout(10000); // timeout em ms
 
 			// Servidor fecha a conexao aqui
 			if (isServer)
-				s.close();
+				socket.close();
+		}catch(ConnectException e){
+			throw new ServerNotFoundException();
 		}catch(IOException e){
 			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
 		}
@@ -71,11 +76,11 @@ public class PluginUDP extends Plugin {
 	}
 
 	@Override
-	public byte[] receive() throws IOException {
+	public byte[] receive() throws IOException, ServerNotFoundException {
 
 		// cria um socket UDP
 		if (isServer)
-			s = new DatagramSocket(port);
+			socket = new DatagramSocket(port);
 
 		byte[] buffer = new byte[10000];
 		byte[] msg = null;
@@ -83,21 +88,24 @@ public class PluginUDP extends Plugin {
 		try{
 			// cria datagrama para receber request do cliente
 			recievePackege = new DatagramPacket(buffer, buffer.length);
-			s.receive(recievePackege);
+			socket.receive(recievePackege);
 			String message = new String(recievePackege.getData());
 
 
 			sentMessageSize = trimForInt(message);
 			buffer = new byte[sentMessageSize];
-
-			s.receive(recievePackege);
+			
+			recievePackege = new DatagramPacket(buffer, buffer.length);
+			socket.receive(recievePackege);
 
 			// envia resposta
 			msg = recievePackege.getData();
 
 			// cliente fecha a conexao aqui
 			if (!isServer)
-				s.close();
+				socket.close();
+		}catch(ConnectException e){
+			throw new ServerNotFoundException();
 		}catch(IOException e){
 			System.err.println(e.getMessage() + "\n" + e.getStackTrace());
 		}

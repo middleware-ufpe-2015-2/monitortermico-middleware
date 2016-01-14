@@ -53,90 +53,53 @@ public class ClientProxy implements IMonitor, Serializable {
 	public ClientProxy() {
 		super();
 	}
-
-	@Override
-	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException{
-
-		// preparando as variaveis
+	
+	public Termination invokeMethod(String methodname, Object parameter) throws ServerNotFoundException{
 		Invocation inv = new Invocation();
 		Termination ter = new Termination();
 		ArrayList<Object> parameters = new ArrayList<Object>();
-		class Local {
-		}
-		;
-		String methodName;
+		
 		Requestor requestor = new Requestor();
 
 		// Preenche variaveis temporarias
-		methodName = Local.class.getEnclosingMethod().getName();
-		parameters.add(tipo);
+		
+		
 
 		// preenche os parametros da chamada
 		inv.setClientProxy(new ClientProxy());
 		inv.getClientProxy().setHost(this.getHost());
 		inv.getClientProxy().setPort(this.port);
-		inv.setOperationName(methodName);
+		inv.setOperationName(methodname);
+		if (parameter != null){
+			parameters.add(parameter);			
+		}		
 		inv.setParameters(parameters);
+		ter = requestor.invoke(inv);		
+		
+		return ter;
+		
+	}
 
-		ter = requestor.invoke(inv);
-		Medicao result = (Medicao) ter.getResult();		
-
+	@Override
+	public Medicao getMedicao(TipoGrandeza tipo) throws ServerNotFoundException{
+		class Local{};
+		Medicao result = (Medicao) invokeMethod(Local.class.getEnclosingMethod().getName(), tipo).getResult();	
 		return result;
 	}
 
 	@SuppressWarnings("unused")
 	@Override
 	public void setmedicao(Medicao m) throws ServerNotFoundException{
-
-		// preparando as variaveis
-		Invocation inv = new Invocation();
-		Termination ter = new Termination();
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		class Local {
-		}
-		;
-		String methodName;
-		Requestor requestor = new Requestor();
-
-		// information received from Client
-		methodName = Local.class.getEnclosingMethod().getName();
-		parameters.add(m);
-
-		// information sent to Requestor
-		inv.getClientProxy().setHost(this.getHost());
-		inv.getClientProxy().setPort(this.port);
-		inv.setOperationName(methodName);
-		inv.setParameters(parameters);
-
-		ter = requestor.invoke(inv);
+		class Local{};
+		invokeMethod(Local.class.getEnclosingMethod().getName(), m);
 	}
 
 	@SuppressWarnings("unused")
 	@Override
 	public Medicao getMedicaoAnterior() throws ServerNotFoundException{
 
-		// preparando as variaveis
-		Invocation inv = new Invocation();
-		Termination ter = new Termination();
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		class Local {
-		}
-		;
-		String methodName;
-		Requestor requestor = new Requestor();
-
-		// Preenche variaveis temporarias
-		methodName = Local.class.getEnclosingMethod().getName();
-
-		// preenche os parametros da chamada
-		inv.getClientProxy().setHost(this.getHost());
-		inv.getClientProxy().setPort(this.port);
-		inv.setOperationName(methodName);
-
-		ter = requestor.invoke(inv);
-	
-		Medicao result = (Medicao) ter.getResult();
-
+		class Local {};	
+		Medicao result = (Medicao) invokeMethod(Local.class.getEnclosingMethod().getName(), null).getResult();
 		return result;
 	}
 
@@ -144,30 +107,9 @@ public class ClientProxy implements IMonitor, Serializable {
 	@Override
 	public List<Medicao> getCincoUltimasMedicoes() throws ServerNotFoundException{
 
-		// preparando as variaveis
-		Invocation inv = new Invocation();
-		Termination ter = new Termination();
-		ArrayList<Object> parameters = new ArrayList<Object>();
-		class Local {
-		}
-		;
-		String methodName;
-		Requestor requestor = new Requestor();
-
-		// Preenche variaveis temporarias
-		methodName = Local.class.getEnclosingMethod().getName();
-
-		// preenche os parametros da chamada
-		inv.setClientProxy(new ClientProxy());
-		inv.getClientProxy().setHost(this.getHost());
-		inv.getClientProxy().setPort(this.port);
-		inv.setOperationName(methodName);
-		inv.setParameters(parameters);
-
-		ter = requestor.invoke(inv);
-
+		class Local{};
 		// TODO Auto-generated method stub
-		return ((List<Medicao>) ter.getResult());
+		return ((List<Medicao>) invokeMethod(Local.class.getEnclosingMethod().getName(), null).getResult());
 	}
 
 }
