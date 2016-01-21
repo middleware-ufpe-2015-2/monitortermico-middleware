@@ -19,7 +19,7 @@ public class ClientRequestHandler {
 
 	}
 
-	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException {
+	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException, TamanhoPoolException {
 		protocol.send(msg);
 	}
 

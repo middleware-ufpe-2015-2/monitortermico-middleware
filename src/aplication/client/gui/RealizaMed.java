@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
@@ -69,14 +70,14 @@ public class RealizaMed {
 					
 					tableModel.inserir(m);
 					
-				} catch (ServerNotFoundException se){
-					
-					JOptionPane
-					.showMessageDialog(null, se.getMessage());										
-				} catch (TamanhoPoolException tpe) {
+				}catch (TamanhoPoolException tpe) {
 					// TODO Auto-generated catch block
 					JOptionPane
-					.showMessageDialog(null, tpe.getMessage());
+					.showMessageDialog(null, tpe.getMessage());					
+				}catch (ServerNotFoundException se){					
+					JOptionPane
+					.showMessageDialog(null, se.getMessage());	
+				
 				} 
 				
 				//Erro deverá ser informado e equipe do naming service.
@@ -98,8 +99,10 @@ public class RealizaMed {
 		JTableHeader header = table.getTableHeader();
 		table.setModel(tableModel);
 		
+		
 		panel.add(header, BorderLayout.NORTH);
 		panel.add(table, BorderLayout.CENTER);
+		panel.add(new JScrollPane(table));
 	}
 
 	public JFrame getFrmMonitorTermico() {

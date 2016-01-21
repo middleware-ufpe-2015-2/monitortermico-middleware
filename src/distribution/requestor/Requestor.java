@@ -55,17 +55,24 @@ public class Requestor implements IRequestor {
 			msgToBeUnMarshalled = crh.receive();
 			//unmarshall reply message
 			msgUnMarshalled = marshaller.unmarshall(msgToBeUnMarshalled);
+			
+			int msgType = msgUnMarshalled.getHeader().getMessageType();
+			if (msgType == 171){
+				throw new TamanhoPoolException("TESTE");
+			}
 
 		} 
+		catch(TamanhoPoolException tpe){
+			throw new ServerNotFoundException(tpe.getMessage());
+		}
 		
 		catch (Throwable e){
-			int messageType = msgUnMarshalled.getHeader().getMessageType();
-			if (messageType == 171){
-				throw new TamanhoPoolException(msgUnMarshalled.getBody().getReplyBody().toString());
-			}else{
+			//int messageType = msgUnMarshalled.getHeader().getMessageType();
+			//if (messageType == 171){
+				//throw new TamanhoPoolException(msgUnMarshalled.getBody().getReplyBody().toString());
+			//}else{
 				throw new ServerNotFoundException("Servidor Indisponível, tente novamente mais tarde. Código do erro: 3.");
-			}			
-			
+		
 		}
 					
 		//return result to Client Proxy

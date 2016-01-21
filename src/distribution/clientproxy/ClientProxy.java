@@ -103,7 +103,6 @@ public class ClientProxy implements IMonitor, Serializable {
 	public List<Medicao> getCincoUltimasMedicoes() throws ServerNotFoundException, TamanhoPoolException{
 
 		class Local{};
-		// TODO Auto-generated method stub
 		return ((List<Medicao>) invokeMethod(Local.class.getEnclosingMethod().getName(), null).getResult());
 	}
 

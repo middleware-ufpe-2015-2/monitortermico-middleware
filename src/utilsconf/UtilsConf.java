@@ -12,7 +12,7 @@ public class UtilsConf {
 	
 	//Constantes Pool
 	public static final int TAM_POOL = 0;
-	public static final int QTD_MAX_TENTATIVAS = 2;
+	public static final int QTD_MAX_TENTATIVAS = 3;
 	public static final String MSG_ERRO_POOL = "Não há mais elementos presentes no pool.";
 	public static final int COD_ERRO_POOL = 171;
 

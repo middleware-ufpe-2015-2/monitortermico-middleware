@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 
 public class QosObserverTxtReader {
 
-	public static void main(String[] args) {
+	public static String medeTempo() {
+		String tempos;
 		String mostra = "";
 		String nomeArq = "../qos_timetable2.txt"; // Nome do arquivo, pode ser
 													// absoluto, ou pastas
@@ -38,14 +39,15 @@ public class QosObserverTxtReader {
 				leitor.close();
 			} catch (Exception erro) {
 			}
-
-			JOptionPane.showMessageDialog(null, mostra,
-					"Tempos totais das medições", 1);
+		tempos = mostra;
+		//JOptionPane.showMessageDialog(null, mostra,"Tempos totais das medições", 1);
 		}
 		// Se nao existir
 		else
-			JOptionPane.showMessageDialog(null, "Arquivo não existe!", "Erro",
-					0);
+			//JOptionPane.showMessageDialog(null, "Arquivo não existe!", "Erro",0);
+			tempos = "Arquivo não existe!";
+		
+		return tempos;
 	}
 
 }

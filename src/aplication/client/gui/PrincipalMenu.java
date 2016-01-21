@@ -14,6 +14,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+import infrastructure.*;
+import infrastructure.qosobserver.QosObserverTxtReader;
 
 public class PrincipalMenu {
 
@@ -44,16 +46,20 @@ public class PrincipalMenu {
 		JMenu menuOpcoes = new JMenu("Op\u00E7\u00F5es");
 
 		JMenuItem menuReaMed = new JMenuItem("Realizar Medi\u00E7\u00F5es");
+		JMenuItem menuTempoMed = new JMenuItem("Tempo das Medi\u00E7\u00F5es");
 		JMenuItem menuHistMed = new JMenuItem("Hist\u00f3rico de Medi\u00E7\u00F5es");
 		JMenuItem menuSair = new JMenuItem("Sair");
 
 		menuSair.addActionListener(new MenuHandler());
 		menuOpcoes.add(menuReaMed);
 		menuOpcoes.add(menuHistMed);
+		menuOpcoes.add(menuTempoMed);
 		menuOpcoes.add(new JSeparator());
 		menuOpcoes.add(menuSair);
 		menuBar.add(menuOpcoes);
 
+		final QosObserverTxtReader qosOb = new QosObserverTxtReader();
+		
 		menuReaMed.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -70,6 +76,13 @@ public class PrincipalMenu {
 				historicoMed.getFrmHistoricoMed().setVisible(true);
 			}
 
+		});
+		
+		menuTempoMed.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, QosObserverTxtReader.medeTempo(),"Tempos das medições", 1);
+			}
 		});
 
 		JMenu menuAjuda = new JMenu("Ajuda");

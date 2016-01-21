@@ -6,6 +6,7 @@ import infrastructure.plugins.ProtocolType;
 import java.io.IOException;
 
 import aplication.exceptions.ServerNotFoundException;
+import distribution.pooling.exception.TamanhoPoolException;
 
 public class ServerRequestHandler {
 	private int port;
@@ -19,13 +20,13 @@ public class ServerRequestHandler {
 
 	}
 
-	public byte [] receive() throws IOException, Throwable, ServerNotFoundException {
+	public byte [] receive() throws IOException, Throwable, ServerNotFoundException, TamanhoPoolException {
 		byte [] rcvMsg = null;
 		rcvMsg=plug.receive();				
 		return rcvMsg;
 	}
 
-	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException {
+	public void send(byte [] msg) throws IOException, InterruptedException, ServerNotFoundException, TamanhoPoolException {
 		plug.send(msg);
 		return;
 	}
